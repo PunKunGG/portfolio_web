@@ -115,9 +115,9 @@ const projectsData = {
     title: "Nurse Learning Platform",
     description: "Educational project for Faculty of Nursing, Khon Kaen University. A platform for nursing students to learn and practice skills with authentication and progress tracking. Features include video lessons, quizzes, progress dashboard, and certificate generation.",
     images: [
-      "https://opengraph.githubassets.com/1/PunKunGG/nurse_project",
-      "https://placehold.co/800x450/111a33/7aa2ff?text=Screenshot+2",
-      "https://placehold.co/800x450/111a33/62e6ff?text=Screenshot+3"
+      "assets/img/nlp1.jpg",
+      "assets/img/nlp2.jpg",
+      "assets/img/nlp3.jpg"
     ],
     tags: ["HTML", "CSS", "JavaScript", "Supabase", "Auth"],
     links: [
