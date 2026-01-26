@@ -102,13 +102,13 @@ const projectsData = {
     title: "Holographic Data Globe",
     description: "This geographic data simulation program, in the form of Globe Visualization, focuses on displaying disaster data such as earthquakes and wildfires using holographic (3D Globe) data visualization. Built with Python and integrated with Firebase for real-time data updates.",
     images: [
-      "https://opengraph.githubassets.com/1/PunKunGG/Holographic-Data-Globe-Earthquake-Wildfire",
-      "https://placehold.co/800x450/111a33/7aa2ff?text=Screenshot+2",
-      "https://placehold.co/800x450/111a33/62e6ff?text=Screenshot+3"
+      "assets/img/holo1.jpg",
+      "assets/img/holo2.jpg"
     ],
-    tags: ["Python", "Website", "Firebase", "3D Visualization", "Data"],
+    tags: ["Python", "Website", "3D Visualization", "Data"],
     links: [
-      { label: "Repo", url: "https://github.com/PunKunGG/Holographic-Data-Globe-Earthquake-Wildfire" }
+      { label: "Repo", url: "https://github.com/PunKunGG/Holographic-Data-Globe-Earthquake-Wildfire" },
+      { label: "Page", url: "https://punkungg.github.io/MobileWeb_Project/"}
     ]
   },
   "nurse-platform": {
@@ -117,7 +117,8 @@ const projectsData = {
     images: [
       "assets/img/nlp1.jpg",
       "assets/img/nlp2.jpg",
-      "assets/img/nlp3.jpg"
+      "assets/img/nlp3.jpg",
+      "assets/img/nlp4.jpg"
     ],
     tags: ["HTML", "CSS", "JavaScript", "Supabase", "Auth"],
     links: [
