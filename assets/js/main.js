@@ -6,27 +6,19 @@ const html = document.documentElement;
 // GitHub stats URLs for light and dark themes
 const githubUrls = {
   light: {
-    stats: "https://github-readme-stats.vercel.app/api?username=PunKunGG&show_icons=true&theme=default&hide_border=true&bg_color=00000000&title_color=4a7fff&text_color=1a2035&icon_color=00b8d4",
-    streak: "https://github-readme-streak-stats.herokuapp.com/?user=PunKunGG&theme=default&hide_border=true&background=00000000&stroke=4a7fff&ring=00b8d4&fire=00b8d4&currStreakLabel=1a2035&sideLabels=1a2035&currStreakNum=1a2035&sideNums=1a2035&dates=5a6580",
     contrib: "https://ghchart.rshah.org/4a7fff/PunKunGG"
   },
   dark: {
-    stats: "https://github-readme-stats.vercel.app/api?username=PunKunGG&show_icons=true&theme=tokyonight&hide_border=true&bg_color=00000000&title_color=7aa2ff&text_color=e7ecff&icon_color=62e6ff",
-    streak: "https://github-readme-streak-stats.herokuapp.com/?user=PunKunGG&theme=tokyonight&hide_border=true&background=00000000&stroke=7aa2ff&ring=62e6ff&fire=62e6ff&currStreakLabel=e7ecff&sideLabels=e7ecff&currStreakNum=e7ecff&sideNums=e7ecff&dates=aab4e6",
     contrib: "https://ghchart.rshah.org/7aa2ff/PunKunGG"
   }
 };
 
 // Update GitHub images based on theme
 function updateGithubImages(theme) {
-  const statsImg = document.getElementById("githubStats");
-  const streakImg = document.getElementById("githubStreak");
   const contribImg = document.getElementById("githubContrib");
 
   const urls = githubUrls[theme] || githubUrls.light;
 
-  if (statsImg) statsImg.src = urls.stats;
-  if (streakImg) streakImg.src = urls.streak;
   if (contribImg) contribImg.src = urls.contrib;
 }
 
@@ -75,9 +67,9 @@ const projectsData = {
     title: "Personal Work",
     description: "This is a personal project for creating a webpage and submitting work for the course CP310006 Mobile Web Development. The project showcases various web development techniques including responsive design, HTML/CSS layouts, and JavaScript interactivity.",
     images: [
-      "https://opengraph.githubassets.com/1/PunKunGG/MobileWeb-Lab",
-      "https://placehold.co/800x450/111a33/7aa2ff?text=Screenshot+2",
-      "https://placehold.co/800x450/111a33/62e6ff?text=Screenshot+3"
+      "assets/img/pw1.jpg",
+      "assets/img/pw2.jpg",
+      "assets/img/pw3.jpg"
     ],
     tags: ["Web Development", "Full-Stack", "HTML", "CSS", "JavaScript"],
     links: [
@@ -89,9 +81,11 @@ const projectsData = {
     title: "KKU Archery Club",
     description: "KKU Archery Club is a project created for use within the university's archery club, with its main system being the borrowing and returning of bows and arrows. Features include user authentication, equipment management, booking system, and admin dashboard for managing inventory.",
     images: [
-      "https://opengraph.githubassets.com/1/PunKunGG/SoftwareDesign_FinalProject",
-      "https://placehold.co/800x450/111a33/7aa2ff?text=Screenshot+2",
-      "https://placehold.co/800x450/111a33/62e6ff?text=Screenshot+3"
+      "assets/img/arc1.jpg",
+      "assets/img/arc2.jpg",
+      "assets/img/arc3.jpg",
+      "assets/img/arc4.jpg",
+      "assets/img/arc5.jpg"
     ],
     tags: ["Web", "UX/UI", "Database", "Laravel", "MySQL"],
     links: [
