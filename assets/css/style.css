@@ -605,6 +605,56 @@ footer {
   flex-wrap: wrap;
 }
 
+
+/* CERTIFICATES */
+.certificate-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0; /* Override default card padding if needed, or keep it */
+}
+
+.cert-img-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.cert-placeholder {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cert-content {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.cert-content h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.cert-content .muted {
+  margin: 0;
+  font-size: 13px;
+}
+
+.cert-meta {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .hero-grid {
