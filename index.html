@@ -8,11 +8,11 @@
       name="description"
       content="Kawpun (Siwapad) - Full-Stack Developer & Game Developer Portfolio"
     />
-
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body>
+    <!-- ========== NAVIGATION ========== -->
     <nav>
       <div class="nav-inner">
         <div class="logo">
@@ -24,6 +24,7 @@
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
           <a href="#github">GitHub</a>
+          <a href="#certificates">Certificates</a>
           <a href="#contact">Contact</a>
         </div>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -32,39 +33,37 @@
       </div>
     </nav>
 
+    <!-- ========== MAIN CONTENT ========== -->
     <main class="wrap">
-      <!-- HERO -->
+      <!-- ===== HERO SECTION ===== -->
       <header class="hero">
         <div class="hero-grid">
           <div class="card hero-photo">
             <div class="avatar" aria-label="Profile photo">
               <img
                 class="avatar-img base"
-                src="assets/img/Student.png"
+                src="assets/img/profile/Student.png"
                 alt="Kawpun profile photo"
               />
               <img
                 class="avatar-img hover"
-                src="assets/img/Student_sukuna.png"
+                src="assets/img/profile/Student_sukuna.png"
                 alt="Kawpun profile photo hover"
               />
             </div>
-            <p class="tiny muted" style="margin: 12px 0 0; text-align: center">
-              Hover me ☝🏻
-            </p>
+            <p class="tiny muted hero-hint">Hover me ☝🏻</p>
           </div>
+
           <div class="card hero-main">
             <div class="kicker">Computer Science @ KKU · Thailand</div>
             <h1>Siwapad Phusrion</h1>
             <p class="sub">Front-End & Back-End Developer · UX/UI Designer</p>
-
             <div class="chips">
               <span class="chip">Full-Stack</span>
               <span class="chip">Web Apps</span>
               <span class="chip">Database</span>
               <span class="chip">UX/UI (Figma)</span>
             </div>
-
             <div class="btns">
               <a class="btn primary" href="#projects">View Projects</a>
               <a
@@ -72,8 +71,14 @@
                 href="https://github.com/PunKunGG"
                 target="_blank"
                 rel="noopener"
-                ><img src="assets/img/github_logo.png" width="20" height="20">Github</a
               >
+                <img
+                  src="assets/img/icons/github_logo.png"
+                  width="20"
+                  height="20"
+                  alt="GitHub"
+                />Github
+              </a>
               <a
                 class="btn"
                 href="./Resume_Siwapad Phusrion.pdf"
@@ -109,30 +114,29 @@
         </div>
       </header>
 
-      <!-- ABOUT -->
+      <!-- ===== ABOUT SECTION ===== -->
       <section id="about">
         <div class="section-title">
           <h2>About</h2>
         </div>
-
         <div class="grid">
           <div class="card p col-8">
-            <p class="muted" style="margin-top: 0">
+            <p class="muted about-text">
               สวัสดีครับ
               <b class="text-strong"
                 >ผมชื่อ ข้าวปั้น กำลังศึกษาอยู่สาขาวิทยาการคอมพิวเตอร์ที่ มข.
-                ผมชอบทำโปรเจกต์ที่ “เริ่มจากไอเดียแล้วไปให้สุดทาง”
+                ผมชอบทำโปรเจกต์ที่ "เริ่มจากไอเดียแล้วไปให้สุดทาง"
                 ตั้งแต่การวางโครงระบบ ออกแบบหน้าจอ ไปจนถึงพัฒนาและทดสอบจริง
                 งานที่ทำมีทั้งเว็บ (Laravel/Next.js, MySQL/Supabase/Firebase)
                 แอป Android (Java/Kotlin) จุดแข็งของผมคือการเรียนรู้ไว
-                ทำงานเป็นขั้นตอน <br /> และแก้ปัญหาแบบไม่หลุดเป้าหมายครับ</b
+                ทำงานเป็นขั้นตอน <br />
+                และแก้ปัญหาแบบไม่หลุดเป้าหมายครับ</b
               >
             </p>
           </div>
-
           <div class="card p col-4 highlights-card">
-            <p style="margin-top: 0"><b>Highlights</b></p>
-            <ul class="muted" style="margin: 0; padding-left: 18px">
+            <p class="highlights-title"><b>Highlights</b></p>
+            <ul class="muted highlights-list">
               <li>Full-Stack web + database</li>
               <li>Mobile app with auth/data</li>
               <li>UX/UI design (Figma)</li>
@@ -143,12 +147,11 @@
         </div>
       </section>
 
-      <!-- PROJECTS -->
+      <!-- ===== PROJECTS SECTION ===== -->
       <section id="projects">
         <div class="section-title">
           <h2>My Projects</h2>
         </div>
-
         <div class="grid">
           <article class="project col-6" data-project="personal-work">
             <h3>Personal Work</h3>
@@ -157,8 +160,8 @@
               work for the course CP310006 Mobile Web Development.
             </p>
             <div class="meta">
-              <span class="pill">Web Development</span
-              ><span class="pill">Full-Stack</span>
+              <span class="pill">Web Development</span>
+              <span class="pill">Full-Stack</span>
             </div>
             <button class="view-project-btn">View Details</button>
           </article>
@@ -171,8 +174,9 @@
               borrowing and returning of bows and arrows.
             </p>
             <div class="meta">
-              <span class="pill">Web</span><span class="pill">UX/UI</span
-              ><span class="pill">Database</span>
+              <span class="pill">Web</span>
+              <span class="pill">UX/UI</span>
+              <span class="pill">Database</span>
             </div>
             <button class="view-project-btn">View Details</button>
           </article>
@@ -186,8 +190,10 @@
               visualization.
             </p>
             <div class="meta">
-              <span class="pill">Python</span><span class="pill">Website</span
-              ><span class="pill">3D Visualization</span><span class="pill">Data</span>
+              <span class="pill">Python</span>
+              <span class="pill">Website</span>
+              <span class="pill">3D Visualization</span>
+              <span class="pill">Data</span>
             </div>
             <button class="view-project-btn">View Details</button>
           </article>
@@ -200,149 +206,478 @@
               authentication and progress tracking.
             </p>
             <div class="meta">
-              <span class="pill">HTML</span><span class="pill">CSS</span>
-              <span class="pill">JavaScript</span
-              ><span class="pill">Supabase</span><span class="pill">Auth</span>
+              <span class="pill">HTML</span>
+              <span class="pill">CSS</span>
+              <span class="pill">JavaScript</span>
+              <span class="pill">Supabase</span>
+              <span class="pill">Auth</span>
             </div>
             <button class="view-project-btn">View Details</button>
           </article>
         </div>
       </section>
 
-      <!-- SKILLS -->
+      <!-- ===== SKILLS SECTION ===== -->
       <section id="skills">
         <div class="section-title">
           <h2>Skills</h2>
         </div>
-
         <div class="grid">
           <div class="card p col-6">
-            <p style="margin-top: 0"><b>Languages</b></p>
+            <p class="skill-title"><b>Languages</b></p>
             <div class="skills">
-              <span class="chip">HTML</span><span class="chip">CSS</span
-              ><span class="chip">PHP</span> <span class="chip">Kotlin</span
-              ><span class="chip">Java</span
-              ><span class="chip">JavaScript</span>
-              <span class="chip">TypeScript</span
-              ><span class="chip">Python</span><span class="chip">SQL</span>
-              <span class="chip">Dart</span><span class="chip">Flutter</span>
-              
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">PHP</span>
+              <span class="chip">Kotlin</span>
+              <span class="chip">Java</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Dart</span>
+              <span class="chip">Flutter</span>
             </div>
           </div>
           <div class="card p col-6">
-            <p style="margin-top: 0"><b>Frameworks & Tools</b></p>
+            <p class="skill-title"><b>Frameworks & Tools</b></p>
             <div class="skills">
-              <span class="chip">Robot Framework</span><span class="chip">Angular</span>
-              <span class="chip">Laravel</span><span class="chip">Next.js</span
-              ><span class="chip">Node.js</span> <span class="chip">MySQL</span
-              ><span class="chip">Supabase</span
-              ><span class="chip">Firebase</span> <span class="chip">Figma</span
-              ><span class="chip">Git/GitHub</span><span class="chip">Word</span
-              ><span class="chip">Excel</span><span class="chip">Canva</span
-              ><span class="chip">Kali Linux</span>
+              <span class="chip">Robot Framework</span>
+              <span class="chip">Angular</span>
+              <span class="chip">Laravel</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">Supabase</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">Figma</span>
+              <span class="chip">Git/GitHub</span>
+              <span class="chip">Word</span>
+              <span class="chip">Excel</span>
+              <span class="chip">Canva</span>
+              <span class="chip">Kali Linux</span>
             </div>
           </div>
           <div class="card p col-6">
-            <p style="margin-top: 0"><b>Personal Skills</b></p>
+            <p class="skill-title"><b>Personal Skills</b></p>
             <div class="skills">
               <span class="chip">Team Collaboration</span>
-              <span class="chip">Problem Solving</span><span class="chip">Effective Communication</span
-              ><span class="chip">Adaptability</span> <span class="chip">Critical Thinking</span
-              ><span class="chip">Time Management</span
-              ><span class="chip">Agile Methodology</span> <span class="chip">Self-Directed Learning</span
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Effective Communication</span>
+              <span class="chip">Adaptability</span>
+              <span class="chip">Critical Thinking</span>
+              <span class="chip">Time Management</span>
+              <span class="chip">Agile Methodology</span>
+              <span class="chip">Self-Directed Learning</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CERTIFICATES -->
-      <section id="certificates">
-        <div class="section-title">
-          <h2>Certificates</h2>
-        </div>
-
-        <div class="grid">
-          <div class="card p col-4 certificate-card">
-            <div class="cert-img-wrapper">
-               <!-- Placeholder for actual certificate image -->
-              <div class="cert-placeholder"><img src="assets/img/gosoft_cert.jpg" height="200 " width="300"></div>
-            </div>
-            <div class="cert-content">
-              <h3>Databricks : Data Engineering</h3>
-              <p class="muted">Issued by Gosoft</p>
-              <div class="cert-meta">
-                <span class="pill">2026</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card p col-4 certificate-card">
-             <div class="cert-img-wrapper">
-              <div class="cert-placeholder"><img src="assets/img/creative_thinking_cert.jpg" height="200 " width="300"></div>
-            </div>
-             <div class="cert-content">
-              <h3>Creative Thinking for Personal Development</h3>
-              <p class="muted">Issued by ThaiMooc</p>
-              <div class="cert-meta">
-                 <span class="pill">2026</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card p col-4 certificate-card">
-             <div class="cert-img-wrapper">
-              <div class="cert-placeholder"><img src="assets/img/creative_problem_cert.jpg" height="200 " width="300"></div>
-            </div>
-            <div class="cert-content">
-              <h3>Creative Problem Solving</h3>
-              <p class="muted">Issued by ThaiMooc</p>
-              <div class="cert-meta">
-                <span class="pill">2026</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- GITHUB ACTIVITY -->
+      <!-- ===== GITHUB ACTIVITY SECTION ===== -->
       <section id="github">
         <div class="section-title">
           <h2>GitHub Activity</h2>
         </div>
-          <!-- Contribution Graph -->
-          <div class="card p col-12 github-card">
-            <img
-              id="githubContrib"
-              src="https://ghchart.rshah.org/4a7fff/PunKunGG"
-              alt="GitHub Contribution Graph"
-              loading="lazy"
-              class="contribution-graph"
-            />
+        <div class="card p col-12 github-card">
+          <img
+            id="githubContrib"
+            src="https://ghchart.rshah.org/4a7fff/PunKunGG"
+            alt="GitHub Contribution Graph"
+            loading="lazy"
+            class="contribution-graph"
+          />
+          <div class="github-footer">
+            <span class="github-contrib-text">
+              <span id="contribCount">—</span> contributions in the last year
+            </span>
+            <div class="github-legend">
+              <span class="legend-label">Less</span>
+              <div class="legend-squares">
+                <span class="legend-sq legend-sq-1"></span>
+                <span class="legend-sq legend-sq-2"></span>
+                <span class="legend-sq legend-sq-3"></span>
+                <span class="legend-sq legend-sq-4"></span>
+                <span class="legend-sq legend-sq-5"></span>
+              </div>
+              <span class="legend-label">More</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- CONTACT -->
+      <!-- ===== CERTIFICATES SECTION ===== -->
+      <section id="certificates">
+        <div class="section-title">
+          <h2>Certificates</h2>
+        </div>
+        <div class="grid">
+          <!-- Certificate 1 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Databricks : Data Engineering"
+            data-cert-issuer="Issued by Gosoft"
+            data-cert-img="assets/img/certificates/gosoft_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/gosoft_cert.jpg"
+                  alt="Databricks Data Engineering Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Databricks : Data Engineering</h3>
+              <p class="muted">Issued by Gosoft</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 2 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Creative Thinking for Personal Development"
+            data-cert-issuer="Issued by ThaiMooc"
+            data-cert-img="assets/img/certificates/creative_thinking_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/creative_thinking_cert.jpg"
+                  alt="Creative Thinking Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Creative Thinking for Personal Development</h3>
+              <p class="muted">Issued by ThaiMooc</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 3 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Creative Problem Solving"
+            data-cert-issuer="Issued by ThaiMooc"
+            data-cert-img="assets/img/certificates/creative_problem_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/creative_problem_cert.jpg"
+                  alt="Creative Problem Solving Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Creative Problem Solving</h3>
+              <p class="muted">Issued by ThaiMooc</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 4 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="ChulamoocX Online Course"
+            data-cert-issuer="Issued by Chulalongkorn University"
+            data-cert-img="assets/img/certificates/chulamooc_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/chulamooc_cert.jpg"
+                  alt="Chulamooc Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>ChulamoocX Online Course</h3>
+              <p class="muted">Issued by Chulalongkorn University</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 5 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Digital Skills Training"
+            data-cert-issuer="Issued by Depa"
+            data-cert-img="assets/img/certificates/depa_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/depa_cert.jpg"
+                  alt="Depa Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Digital Skills Training</h3>
+              <p class="muted">Issued by Depa</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 6 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Drug Awareness Training"
+            data-cert-issuer="Issued by Office of the Narcotics Control Board"
+            data-cert-img="assets/img/certificates/drug_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/drug_cert.jpg"
+                  alt="Drug Awareness Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Drug Awareness Training</h3>
+              <p class="muted">
+                Issued by Office of the Narcotics Control Board
+              </p>
+              <div class="cert-meta"><span class="pill">2021</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 7 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Ethics & Professional Standards"
+            data-cert-issuer="Issued by J Knowledge"
+            data-cert-img="assets/img/certificates/ethic_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/ethic_cert.jpg"
+                  alt="Ethics Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Ethics & Professional Standards</h3>
+              <p class="muted">Issued by J Knowledge</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 8 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Youth Leadership Award"
+            data-cert-issuer="Issued by Outstanding Children and Youth Club"
+            data-cert-img="assets/img/certificates/leader_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/leader_cert.jpg"
+                  alt="Leadership Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Youth Leadership Award</h3>
+              <p class="muted">Issued by Outstanding Children and Youth Club</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 9 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Pre-Engineering Program"
+            data-cert-issuer="Issued by Faculty of Engineering, Khon Kaen University"
+            data-cert-img="assets/img/certificates/preEn_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/preEn_cert.jpg"
+                  alt="Pre-Engineering Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Pre-Engineering Program</h3>
+              <p class="muted">Issued by Faculty of Engineering, KKU</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 10 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Robot Programming Workshop"
+            data-cert-issuer="Issued by Faculty of Science, Mahasarakham University"
+            data-cert-img="assets/img/certificates/robot_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/robot_cert.jpg"
+                  alt="Robot Programming Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Robot Programming Workshop</h3>
+              <p class="muted">Issued by Faculty of Science, MSU</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 11 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Science Competition Award"
+            data-cert-issuer="Issued by Muangphonpittayakom School"
+            data-cert-img="assets/img/certificates/sci_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/sci_cert.jpg"
+                  alt="Science Competition Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Science Competition Award</h3>
+              <p class="muted">Issued by Muangphonpittayakom School</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 12 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Art & Culture Competition"
+            data-cert-issuer="Issued by Khon Kaen Educational Service Area Office"
+            data-cert-img="assets/img/certificates/silapa_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/silapa_cert.jpg"
+                  alt="Art Competition Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Art & Culture Competition</h3>
+              <p class="muted">Issued by Khon Kaen Educational Service Area</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 13 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="SketchUp 3D Design"
+            data-cert-issuer="Issued by Muangphonpittayakom School"
+            data-cert-img="assets/img/certificates/sketchup_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/sketchup_cert.jpg"
+                  alt="SketchUp Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>SketchUp 3D Design</h3>
+              <p class="muted">Issued by Muangphonpittayakom School</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 14 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Hour of Code Completion"
+            data-cert-issuer="Issued by Code.org"
+            data-cert-img="assets/img/certificates/thoc_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/thoc_cert.jpg"
+                  alt="Hour of Code Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Hour of Code Completion</h3>
+              <p class="muted">Issued by Code.org</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+
+          <!-- Certificate 15 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="World Greenmech Contest"
+            data-cert-issuer="Issued by World Greenmech Contest"
+            data-cert-img="assets/img/certificates/wgc_cert.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/wgc_cert.jpg"
+                  alt="World Greenmech Contest Certificate"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>World Greenmech Contest</h3>
+              <p class="muted">Issued by World Greenmech Contest</p>
+              <div class="cert-meta"><span class="pill">2022</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACT SECTION ===== -->
       <section id="contact">
         <div class="section-title">
           <h2>Contact</h2>
         </div>
-
         <div class="grid">
           <div class="card p col-12">
-            <p class="muted" style="margin-top: 0">
+            <p class="muted contact-intro">
               Want to collaborate or talk about projects? Reach me here:
             </p>
             <div class="contact-info">
               <div class="contact-item">
-                <span class="contact-icon"><img src="assets/img/github_logo.png" width="20" height="20"><img/></span>
+                <span class="contact-icon"
+                  ><img
+                    src="assets/img/icons/github_logo.png"
+                    width="20"
+                    height="20"
+                    alt="GitHub"
+                /></span>
                 <div class="contact-detail">
                   <span class="contact-label">GitHub</span>
                   <span class="contact-value">github.com/PunKunGG</span>
                 </div>
               </div>
               <div class="contact-item">
-                <span class="contact-icon"><img src="assets/img/email_logo.png" width="20" height="20"><img/></span>
+                <span class="contact-icon"
+                  ><img
+                    src="assets/img/icons/email_logo.png"
+                    width="20"
+                    height="20"
+                    alt="Email"
+                /></span>
                 <div class="contact-detail">
                   <span class="contact-label">Email</span>
                   <span class="contact-value">kawpun1140@gmail.com</span>
@@ -350,7 +685,13 @@
                 </div>
               </div>
               <div class="contact-item">
-                <span class="contact-icon"><img src="assets/img/linkedin_logo.png" width="20" height="20"><img/></span>
+                <span class="contact-icon"
+                  ><img
+                    src="assets/img/icons/linkedin_logo.png"
+                    width="20"
+                    height="20"
+                    alt="LinkedIn"
+                /></span>
                 <div class="contact-detail">
                   <span class="contact-label">LinkedIn</span>
                   <span class="contact-value">Siwapad Phusrion</span>
@@ -361,6 +702,7 @@
         </div>
       </section>
 
+      <!-- ===== FOOTER ===== -->
       <footer class="wrap">
         <div class="tiny">
           © Kawpun | Portfolio Website · Built with plain HTML/CSS on GitHub
@@ -369,7 +711,9 @@
       </footer>
     </main>
 
-    <!-- PROJECT MODAL -->
+    <!-- ========== MODALS ========== -->
+
+    <!-- Project Modal -->
     <div class="modal-overlay" id="projectModal">
       <div class="modal">
         <button class="modal-close" id="modalClose">&times;</button>
@@ -388,6 +732,21 @@
       </div>
     </div>
 
+    <!-- Certificate Lightbox -->
+    <div class="cert-lightbox" id="certLightbox">
+      <div class="cert-lightbox-content">
+        <button class="cert-lightbox-close" id="certLightboxClose">
+          &times;
+        </button>
+        <img id="certLightboxImg" src="" alt="Certificate" />
+        <div class="cert-lightbox-info">
+          <h4 id="certLightboxTitle"></h4>
+          <p id="certLightboxIssuer"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SCRIPTS ========== -->
     <script src="assets/js/main.js"></script>
   </body>
 </html>
