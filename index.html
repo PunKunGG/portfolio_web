@@ -6,7 +6,49 @@
     <title>Kawpun | Portfolio Website</title>
     <meta
       name="description"
-      content="Kawpun (Siwapad) - Full-Stack Developer & Game Developer Portfolio"
+      content="Kawpun (Siwapad) - Full-Stack Developer & UX/UI Designer Portfolio"
+    />
+    <link rel="canonical" href="https://punkungg.github.io/portfolio_web/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kawpun | Portfolio Website" />
+    <meta
+      property="og:description"
+      content="Portfolio of Siwapad Phusrion, a Full-Stack Developer and UX/UI Designer."
+    />
+    <meta
+      property="og:url"
+      content="https://punkungg.github.io/portfolio_web/"
+    />
+    <meta
+      property="og:image"
+      content="https://punkungg.github.io/portfolio_web/assets/img/og-portfolio.jpg"
+    />
+    <meta property="og:image:width" content="1731" />
+    <meta property="og:image:height" content="909" />
+    <meta
+      property="og:image:alt"
+      content="Siwapad Phusrion — Full-Stack Developer and UX/UI Designer"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kawpun | Portfolio Website" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Siwapad Phusrion, a Full-Stack Developer and UX/UI Designer."
+    />
+    <meta
+      name="twitter:image"
+      content="https://punkungg.github.io/portfolio_web/assets/img/og-portfolio.jpg"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="assets/img/favicon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="192x192"
+      href="assets/img/apple-touch-icon.png"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
@@ -19,7 +61,19 @@
           <span class="dot"></span>
           <span>PunKunGG</span>
         </div>
-        <div class="nav-links">
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-controls="primaryNav"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links" id="primaryNav">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
@@ -27,8 +81,14 @@
           <a href="#certificates">Certificates</a>
           <a href="#contact">Contact</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <span class="theme-icon">🌙</span>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark theme"
+          aria-pressed="false"
+        >
+          <span class="theme-icon" aria-hidden="true">🌙</span>
         </button>
       </div>
     </nav>
@@ -44,11 +104,18 @@
                 class="avatar-img base"
                 src="assets/img/profile/Student.png"
                 alt="Kawpun profile photo"
+                width="190"
+                height="190"
+                decoding="async"
+                fetchpriority="high"
               />
               <img
                 class="avatar-img hover"
                 src="assets/img/profile/Student_sukuna.png"
                 alt="Kawpun profile photo hover"
+                width="190"
+                height="190"
+                decoding="async"
               />
             </div>
             <p class="tiny muted hero-hint">Hover me ☝🏻</p>
@@ -81,16 +148,14 @@
               </a>
               <a
                 class="btn"
-                href="./Resume_Siwapad Phusrion.pdf"
-                target="_blank"
-                rel="noopener"
+                href="./Siwapad_Phusrion_Resume.pdf"
+                download="Siwapad_Phusrion_Resume.pdf"
                 >Download Resume</a
               >
               <a
                 class="btn"
                 href="./CV_Siwapad Phusrion.pdf"
-                target="_blank"
-                rel="noopener"
+                download="CV_Siwapad_Phusrion.pdf"
                 >Download CV</a
               >
             </div>
@@ -121,7 +186,7 @@
         </div>
         <div class="grid">
           <div class="card p col-8">
-            <p class="muted about-text">
+            <p class="muted about-text" lang="th">
               สวัสดีครับ
               <b class="text-strong"
                 >ผมชื่อ ข้าวปั้น กำลังศึกษาอยู่สาขาวิทยาการคอมพิวเตอร์ที่ มข.
@@ -152,68 +217,11 @@
         <div class="section-title">
           <h2>My Projects</h2>
         </div>
-        <div class="grid">
-          <article class="project col-6" data-project="personal-work">
-            <h3>Personal Work</h3>
-            <p class="muted">
-              This is a personal project for creating a webpage and submitting
-              work for the course CP310006 Mobile Web Development.
-            </p>
-            <div class="meta">
-              <span class="pill">Web Development</span>
-              <span class="pill">Full-Stack</span>
-            </div>
-            <button class="view-project-btn">View Details</button>
-          </article>
-
-          <article class="project col-6" data-project="kku-archery">
-            <h3>KKU Archery Club</h3>
-            <p class="muted">
-              KKU Archery Club is a project created for use within the
-              university's archery club, with its main system being the
-              borrowing and returning of bows and arrows.
-            </p>
-            <div class="meta">
-              <span class="pill">Web</span>
-              <span class="pill">UX/UI</span>
-              <span class="pill">Database</span>
-            </div>
-            <button class="view-project-btn">View Details</button>
-          </article>
-
-          <article class="project col-6" data-project="holo-globe">
-            <h3>Holographic Data Globe</h3>
-            <p class="muted">
-              This geographic data simulation program, in the form of Globe
-              Visualization, focuses on displaying disaster data such as
-              earthquakes and wildfires using holographic (3D Globe) data
-              visualization.
-            </p>
-            <div class="meta">
-              <span class="pill">Python</span>
-              <span class="pill">Website</span>
-              <span class="pill">3D Visualization</span>
-              <span class="pill">Data</span>
-            </div>
-            <button class="view-project-btn">View Details</button>
-          </article>
-
-          <article class="project col-6" data-project="nurse-platform">
-            <h3>Nurse Learning Platform</h3>
-            <p class="muted">
-              Educational project, Faculty of Nursing, Khon Kaen University. A
-              platform for nursing students to learn and practice skills with
-              authentication and progress tracking.
-            </p>
-            <div class="meta">
-              <span class="pill">HTML</span>
-              <span class="pill">CSS</span>
-              <span class="pill">JavaScript</span>
-              <span class="pill">Supabase</span>
-              <span class="pill">Auth</span>
-            </div>
-            <button class="view-project-btn">View Details</button>
-          </article>
+        <div class="grid" id="projectsGrid">
+          <div class="card p col-12 project-fallback">
+            The interactive project gallery requires JavaScript.
+            <a href="https://github.com/PunKunGG">View projects on GitHub</a>
+          </div>
         </div>
       </section>
 
@@ -285,12 +293,17 @@
             src="https://ghchart.rshah.org/4a7fff/PunKunGG"
             alt="GitHub Contribution Graph"
             loading="lazy"
+            decoding="async"
             class="contribution-graph"
           />
           <div class="github-footer">
-            <span class="github-contrib-text">
-              <span id="contribCount">—</span> contributions in the last year
-            </span>
+            <a
+              class="github-profile-link"
+              href="https://github.com/PunKunGG"
+              target="_blank"
+              rel="noopener"
+              >View complete activity on GitHub</a
+            >
             <div class="github-legend">
               <span class="legend-label">Less</span>
               <div class="legend-squares">
@@ -311,7 +324,7 @@
         <div class="section-title">
           <h2>Certificates</h2>
         </div>
-        <div class="grid">
+        <div class="grid" id="certificatesGrid">
           <!-- Certificate 1 -->
           <div
             class="card col-4 certificate-card"
@@ -324,6 +337,10 @@
                 <img
                   src="assets/img/certificates/gosoft_cert.jpg"
                   alt="Databricks Data Engineering Certificate"
+                  width="1046"
+                  height="736"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -346,6 +363,10 @@
                 <img
                   src="assets/img/certificates/creative_thinking_cert.jpg"
                   alt="Creative Thinking Certificate"
+                  width="1117"
+                  height="783"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -368,12 +389,226 @@
                 <img
                   src="assets/img/certificates/creative_problem_cert.jpg"
                   alt="Creative Problem Solving Certificate"
+                  width="1167"
+                  height="845"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
             <div class="cert-content">
               <h3>Creative Problem Solving</h3>
               <p class="muted">Issued by ThaiMooc</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 1 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="KnowBe4 Security Awareness Training"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega1.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega1.jpg"
+                  alt="KnowBe4 Security Awareness Training Certificate"
+                  width="798"
+                  height="610"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>KnowBe4 Security Awareness Training</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 2 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Complying with the General Data Protection Regulation (GDPR)"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega2.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega2.jpg"
+                  alt="General Data Protection Regulation Certificate"
+                  width="795"
+                  height="612"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>
+                Complying with the General Data Protection Regulation (GDPR)
+              </h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 3 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Deepfake Messaging Attacks"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega3.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega3.jpg"
+                  alt="Deepfake Messaging Attacks Certificate"
+                  width="795"
+                  height="607"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Deepfake Messaging Attacks</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 4 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Detect and Prevent Callback Phishing"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega4.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega4.jpg"
+                  alt="Detect and Prevent Callback Phishing Certificate"
+                  width="791"
+                  height="610"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Detect and Prevent Callback Phishing</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 5 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Environmental, Social, and Governance (ESG)"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega5.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega5.jpg"
+                  alt="Environmental, Social, and Governance Certificate"
+                  width="793"
+                  height="613"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Environmental, Social, and Governance (ESG)</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 6 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Links and Attachments: Think Before You Click"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega6.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega6.jpg"
+                  alt="Links and Attachments Security Certificate"
+                  width="796"
+                  height="609"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Links and Attachments: Think Before You Click</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 7 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Privacy and Security"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega7.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega7.jpg"
+                  alt="Privacy and Security Certificate"
+                  width="793"
+                  height="607"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Privacy and Security</h3>
+              <p class="muted">Issued by Alpega</p>
+              <div class="cert-meta"><span class="pill">2026</span></div>
+            </div>
+          </div>
+
+          <!-- Alpega Certificate 8 -->
+          <div
+            class="card col-4 certificate-card"
+            data-cert-title="Protecting Valuable Data - ISO 27001"
+            data-cert-issuer="Issued by Alpega"
+            data-cert-img="assets/img/certificates/Alpega8.jpg"
+          >
+            <div class="cert-img-wrapper">
+              <div class="cert-placeholder">
+                <img
+                  src="assets/img/certificates/Alpega8.jpg"
+                  alt="Protecting Valuable Data ISO 27001 Certificate"
+                  width="794"
+                  height="612"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="cert-content">
+              <h3>Protecting Valuable Data - ISO 27001</h3>
+              <p class="muted">Issued by Alpega</p>
               <div class="cert-meta"><span class="pill">2026</span></div>
             </div>
           </div>
@@ -390,6 +625,10 @@
                 <img
                   src="assets/img/certificates/chulamooc_cert.jpg"
                   alt="Chulamooc Certificate"
+                  width="727"
+                  height="475"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -412,6 +651,10 @@
                 <img
                   src="assets/img/certificates/depa_cert.jpg"
                   alt="Depa Certificate"
+                  width="683"
+                  height="525"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -434,6 +677,10 @@
                 <img
                   src="assets/img/certificates/drug_cert.jpg"
                   alt="Drug Awareness Certificate"
+                  width="721"
+                  height="515"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -458,6 +705,10 @@
                 <img
                   src="assets/img/certificates/ethic_cert.jpg"
                   alt="Ethics Certificate"
+                  width="721"
+                  height="510"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -480,6 +731,10 @@
                 <img
                   src="assets/img/certificates/leader_cert.jpg"
                   alt="Leadership Certificate"
+                  width="720"
+                  height="511"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -502,6 +757,10 @@
                 <img
                   src="assets/img/certificates/preEn_cert.jpg"
                   alt="Pre-Engineering Certificate"
+                  width="731"
+                  height="523"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -524,6 +783,10 @@
                 <img
                   src="assets/img/certificates/robot_cert.jpg"
                   alt="Robot Programming Certificate"
+                  width="681"
+                  height="460"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -546,6 +809,10 @@
                 <img
                   src="assets/img/certificates/sci_cert.jpg"
                   alt="Science Competition Certificate"
+                  width="732"
+                  height="456"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -568,6 +835,10 @@
                 <img
                   src="assets/img/certificates/silapa_cert.jpg"
                   alt="Art Competition Certificate"
+                  width="693"
+                  height="491"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -590,6 +861,10 @@
                 <img
                   src="assets/img/certificates/sketchup_cert.jpg"
                   alt="SketchUp Certificate"
+                  width="689"
+                  height="475"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -612,6 +887,10 @@
                 <img
                   src="assets/img/certificates/thoc_cert.jpg"
                   alt="Hour of Code Certificate"
+                  width="702"
+                  height="517"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -634,6 +913,10 @@
                 <img
                   src="assets/img/certificates/wgc_cert.jpg"
                   alt="World Greenmech Contest Certificate"
+                  width="728"
+                  height="517"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -643,6 +926,17 @@
               <div class="cert-meta"><span class="pill">2022</span></div>
             </div>
           </div>
+        </div>
+        <div class="certificate-controls" id="certificateControls" hidden>
+          <button
+            class="btn certificate-toggle"
+            id="certificateToggle"
+            type="button"
+            aria-controls="certificatesGrid"
+            aria-expanded="false"
+          >
+            Show more certificates
+          </button>
         </div>
       </section>
 
@@ -657,7 +951,12 @@
               Want to collaborate or talk about projects? Reach me here:
             </p>
             <div class="contact-info">
-              <div class="contact-item">
+              <a
+                class="contact-item"
+                href="https://github.com/PunKunGG"
+                target="_blank"
+                rel="noopener"
+              >
                 <span class="contact-icon"
                   ><img
                     src="assets/img/icons/github_logo.png"
@@ -669,7 +968,7 @@
                   <span class="contact-label">GitHub</span>
                   <span class="contact-value">github.com/PunKunGG</span>
                 </div>
-              </div>
+              </a>
               <div class="contact-item">
                 <span class="contact-icon"
                   ><img
@@ -680,8 +979,12 @@
                 /></span>
                 <div class="contact-detail">
                   <span class="contact-label">Email</span>
-                  <span class="contact-value">kawpun1140@gmail.com</span>
-                  <span class="contact-value">siwapad.p@kkumail.com</span>
+                  <a class="contact-value" href="mailto:kawpun1140@gmail.com"
+                    >kawpun1140@gmail.com</a
+                  >
+                  <a class="contact-value" href="mailto:siwapad.p@kkumail.com"
+                    >siwapad.p@kkumail.com</a
+                  >
                 </div>
               </div>
               <div class="contact-item">
@@ -694,7 +997,11 @@
                 /></span>
                 <div class="contact-detail">
                   <span class="contact-label">LinkedIn</span>
-                  <span class="contact-value">Siwapad Phusrion</span>
+                  <a
+                    class="contact-value"
+                    href="https://www.linkedin.com/in/siwapad-phusrion-943506308/"
+                    >Siwapad Phusrion</a
+                  >
                 </div>
               </div>
             </div>
@@ -705,8 +1012,8 @@
       <!-- ===== FOOTER ===== -->
       <footer class="wrap">
         <div class="tiny">
-          © Kawpun | Portfolio Website · Built with plain HTML/CSS on GitHub
-          Pages
+          © <span id="year"></span> Kawpun | Portfolio Website · Built with
+          plain HTML/CSS on GitHub Pages
         </div>
       </footer>
     </main>
@@ -714,14 +1021,44 @@
     <!-- ========== MODALS ========== -->
 
     <!-- Project Modal -->
-    <div class="modal-overlay" id="projectModal">
-      <div class="modal">
-        <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-overlay" id="projectModal" aria-hidden="true">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+        aria-describedby="modalDescription"
+        tabindex="-1"
+      >
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+          aria-label="Close project details"
+        >
+          &times;
+        </button>
         <div class="modal-gallery">
-          <button class="gallery-arrow gallery-prev" id="galleryPrev">❮</button>
-          <img id="modalImage" src="" alt="Project screenshot" />
-          <button class="gallery-arrow gallery-next" id="galleryNext">❯</button>
-          <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+          <button
+            class="gallery-arrow gallery-prev"
+            id="galleryPrev"
+            type="button"
+            aria-label="Previous project image"
+          >
+            ❮
+          </button>
+          <img id="modalImage" alt="Project screenshot" />
+          <button
+            class="gallery-arrow gallery-next"
+            id="galleryNext"
+            type="button"
+            aria-label="Next project image"
+          >
+            ❯
+          </button>
+          <div class="gallery-counter" id="galleryCounter" aria-live="polite">
+            1 / 3
+          </div>
         </div>
         <div class="modal-content">
           <h3 id="modalTitle"></h3>
@@ -733,12 +1070,24 @@
     </div>
 
     <!-- Certificate Lightbox -->
-    <div class="cert-lightbox" id="certLightbox">
-      <div class="cert-lightbox-content">
-        <button class="cert-lightbox-close" id="certLightboxClose">
+    <div class="cert-lightbox" id="certLightbox" aria-hidden="true">
+      <div
+        class="cert-lightbox-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="certLightboxTitle"
+        aria-describedby="certLightboxIssuer"
+        tabindex="-1"
+      >
+        <button
+          class="cert-lightbox-close"
+          id="certLightboxClose"
+          type="button"
+          aria-label="Close certificate preview"
+        >
           &times;
         </button>
-        <img id="certLightboxImg" src="" alt="Certificate" />
+        <img id="certLightboxImg" alt="Certificate" />
         <div class="cert-lightbox-info">
           <h4 id="certLightboxTitle"></h4>
           <p id="certLightboxIssuer"></p>
@@ -747,6 +1096,6 @@
     </div>
 
     <!-- ========== SCRIPTS ========== -->
-    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
   </body>
 </html>

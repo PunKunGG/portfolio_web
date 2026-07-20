@@ -74,6 +74,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -98,6 +106,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   max-width: var(--max);
   margin: 0 auto;
   padding: 14px 24px;
@@ -136,6 +145,43 @@ nav {
   background: rgba(255, 255, 255, 0.06);
 }
 
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--text);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 /* Theme Toggle */
 .theme-toggle {
   display: flex;
@@ -172,7 +218,7 @@ nav {
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 0.55fr 1.2fr 0.8fr;
   gap: 18px;
   align-items: stretch;
 }
@@ -431,8 +477,10 @@ footer {
 /* GITHUB ACTIVITY */
 .github-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   overflow: hidden;
   min-height: 180px;
 }
@@ -471,6 +519,11 @@ footer {
 .contact-item:hover {
   transform: translateX(4px);
   background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-item[href]:hover .contact-value,
+a.contact-value:hover {
+  color: var(--brand);
 }
 
 .contact-icon {
@@ -527,9 +580,7 @@ footer {
   z-index: 100;
   opacity: 0;
   visibility: hidden;
-  transition:
-    0.3s opacity,
-    0.3s visibility;
+  transition: opacity 0.3s ease;
 }
 
 .modal-overlay.active {
@@ -538,6 +589,7 @@ footer {
 }
 
 .modal {
+  position: relative;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -699,13 +751,6 @@ footer {
   opacity: 0.7;
 }
 
-/* GITHUB ACTIVITY */
-.github-card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .contribution-graph {
   width: 100%;
   height: auto;
@@ -720,14 +765,14 @@ footer {
   gap: 12px;
 }
 
-.github-contrib-text {
+.github-profile-link {
   font-size: 13px;
-  color: var(--muted);
+  font-weight: 600;
+  color: var(--brand);
 }
 
-.github-contrib-text #contribCount {
-  font-weight: 600;
-  color: var(--text);
+.github-profile-link:hover {
+  text-decoration: underline;
 }
 
 .github-legend {
@@ -795,8 +840,32 @@ footer {
   cursor: pointer;
 }
 
+.certificate-card[hidden],
+.certificate-controls[hidden] {
+  display: none !important;
+}
+
+.certificate-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.certificate-toggle {
+  min-width: 220px;
+  cursor: pointer;
+  font: inherit;
+}
+
 .certificate-card:hover {
   transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 25px 70px rgba(74, 127, 255, 0.25),
+    0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.certificate-card:focus-visible {
+  transform: translateY(-4px);
   box-shadow:
     0 25px 70px rgba(74, 127, 255, 0.25),
     0 8px 25px rgba(0, 0, 0, 0.15);
@@ -833,7 +902,8 @@ footer {
   z-index: 2;
 }
 
-.certificate-card:hover .cert-img-wrapper::before {
+.certificate-card:hover .cert-img-wrapper::before,
+.certificate-card:focus-visible .cert-img-wrapper::before {
   opacity: 1;
 }
 
@@ -862,7 +932,8 @@ footer {
   color: var(--text);
 }
 
-.certificate-card:hover .cert-img-wrapper::after {
+.certificate-card:hover .cert-img-wrapper::after,
+.certificate-card:focus-visible .cert-img-wrapper::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
@@ -884,7 +955,8 @@ footer {
     filter 0.3s ease;
 }
 
-.certificate-card:hover .cert-placeholder img {
+.certificate-card:hover .cert-placeholder img,
+.certificate-card:focus-visible .cert-placeholder img {
   transform: scale(1.08);
   filter: brightness(1.05);
 }
@@ -910,7 +982,8 @@ footer {
   transition: color 0.2s ease;
 }
 
-.certificate-card:hover .cert-content h3 {
+.certificate-card:hover .cert-content h3,
+.certificate-card:focus-visible .cert-content h3 {
   color: var(--brand);
 }
 
@@ -949,9 +1022,7 @@ footer {
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.35s ease,
-    visibility 0.35s ease;
+  transition: opacity 0.35s ease;
   padding: 40px;
 }
 
@@ -1030,32 +1101,6 @@ footer {
   margin: 0;
   font-size: 13px;
   opacity: 0.8;
-}
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-  h1 {
-    font-size: 36px;
-  }
-  .col-6,
-  .col-4,
-  .col-8 {
-    grid-column: span 12;
-  }
-  .nav-links {
-    display: none;
-  }
-}
-
-/* HERO: 3 columns on desktop */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 0.55fr 1.2fr 0.8fr; /* photo | main | side */
-  gap: 18px;
-  align-items: stretch;
 }
 
 /* Profile photo card */
@@ -1141,16 +1186,66 @@ footer {
   transform: scale(1);
 }
 
-/* Mobile: stack */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
   }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .col-6,
+  .col-4,
+  .col-8 {
+    grid-column: span 12;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 24px;
+    right: 24px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
   .avatar {
     width: 170px;
     height: 170px;
   }
+
   .hero-photo {
     order: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
