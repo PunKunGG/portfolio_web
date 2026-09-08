@@ -61,35 +61,45 @@
           <span class="dot"></span>
           <span>PunKunGG</span>
         </div>
-        <button
-          class="nav-toggle"
-          id="navToggle"
-          type="button"
-          aria-label="Open navigation menu"
-          aria-controls="primaryNav"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
         <div class="nav-links" id="primaryNav">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#github">GitHub</a>
-          <a href="#certificates">Certificates</a>
-          <a href="#contact">Contact</a>
+          <a href="#about" data-i18n="navAbout">About</a>
+          <a href="#projects" data-i18n="navProjects">Projects</a>
+          <a href="#skills" data-i18n="navSkills">Skills</a>
+          <a href="#github" data-i18n="navGithub">GitHub</a>
+          <a href="#certificates" data-i18n="navCertificates">Certificates</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
         </div>
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Switch to dark theme"
-          aria-pressed="false"
-        >
-          <span class="theme-icon" aria-hidden="true">🌙</span>
-        </button>
+        <div class="nav-actions">
+          <button
+            class="language-toggle"
+            id="languageToggle"
+            type="button"
+            aria-label="Switch to Thai"
+          >
+            <span id="languageLabel" aria-hidden="true">TH</span>
+          </button>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Switch to dark theme"
+            aria-pressed="false"
+          >
+            <span class="theme-icon" aria-hidden="true">🌙</span>
+          </button>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-controls="primaryNav"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -99,11 +109,12 @@
       <header class="hero">
         <div class="hero-grid">
           <div class="card hero-photo">
-            <div class="avatar" aria-label="Profile photo">
+            <div class="avatar">
               <img
                 class="avatar-img base"
                 src="assets/img/profile/Student.png"
                 alt="Kawpun profile photo"
+                data-i18n-alt="profilePhotoAlt"
                 width="190"
                 height="190"
                 decoding="async"
@@ -113,18 +124,19 @@
                 class="avatar-img hover"
                 src="assets/img/profile/Student_sukuna.png"
                 alt="Kawpun profile photo hover"
+                data-i18n-alt="profilePhotoHoverAlt"
                 width="190"
                 height="190"
                 decoding="async"
               />
             </div>
-            <p class="tiny muted hero-hint">Hover me ☝🏻</p>
+            <p class="tiny muted hero-hint" data-i18n="heroHint">Hover me ☝🏻</p>
           </div>
 
           <div class="card hero-main">
-            <div class="kicker">Computer Science @ KKU · Thailand</div>
+            <div class="kicker" data-i18n="heroKicker">Computer Science @ KKU · Thailand</div>
             <h1>Siwapad Phusrion</h1>
-            <p class="sub">Front-End & Back-End Developer · UX/UI Designer</p>
+            <p class="sub" data-i18n="heroSubtitle">Front-End & Back-End Developer · UX/UI Designer</p>
             <div class="chips">
               <span class="chip">Full-Stack</span>
               <span class="chip">Web Apps</span>
@@ -132,7 +144,7 @@
               <span class="chip">UX/UI (Figma)</span>
             </div>
             <div class="btns">
-              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
               <a
                 class="btn"
                 href="https://github.com/PunKunGG"
@@ -148,14 +160,16 @@
               </a>
               <a
                 class="btn"
-                href="./Siwapad_Phusrion_Resume.pdf"
+                href="./Siwapad_Phusrion_resume.pdf"
                 download="Siwapad_Phusrion_Resume.pdf"
+                data-i18n="downloadResume"
                 >Download Resume</a
               >
               <a
                 class="btn"
                 href="./CV_Siwapad Phusrion.pdf"
                 download="CV_Siwapad_Phusrion.pdf"
+                data-i18n="downloadCv"
                 >Download CV</a
               >
             </div>
@@ -163,17 +177,17 @@
 
           <aside class="card hero-side">
             <div class="stat">
-              <b>Focus</b><span>Web Development & UX/UI</span>
+              <b data-i18n="focusLabel">Focus</b><span data-i18n="focusValue">Web Development & UX/UI</span>
             </div>
             <div class="stat">
-              <b>Frameworks</b><span>Robot · Laravel · React</span>
+              <b data-i18n="frameworksLabel">Frameworks</b><span>Robot · Laravel · React</span>
             </div>
             <div class="stat">
-              <b>Stacks</b><span>Python · HTML · CSS</span>
+              <b data-i18n="stacksLabel">Stacks</b><span>Python · HTML · CSS</span>
             </div>
-            <div class="stat"><b>Database</b><span>MySQL · Docker</span></div>
+            <div class="stat"><b data-i18n="databaseLabel">Database</b><span>MySQL · Docker</span></div>
             <div class="stat">
-              <b>Interest</b><span>UX/UI · Web · Cyber · IoT</span>
+              <b data-i18n="interestLabel">Interest</b><span>UX/UI · Web · Cyber · IoT</span>
             </div>
           </aside>
         </div>
@@ -182,31 +196,25 @@
       <!-- ===== ABOUT SECTION ===== -->
       <section id="about">
         <div class="section-title">
-          <h2>About</h2>
+          <h2 data-i18n="aboutHeading">About</h2>
         </div>
         <div class="grid">
           <div class="card p col-8">
-            <p class="muted about-text" lang="th">
-              สวัสดีครับ
-              <b class="text-strong"
-                >ผมชื่อ ข้าวปั้น กำลังศึกษาอยู่สาขาวิทยาการคอมพิวเตอร์ที่ มข.
-                ผมชอบทำโปรเจกต์ที่ "เริ่มจากไอเดียแล้วไปให้สุดทาง"
-                ตั้งแต่การวางโครงระบบ ออกแบบหน้าจอ ไปจนถึงพัฒนาและทดสอบจริง
-                งานที่ทำมีทั้งเว็บ (Laravel/Next.js, MySQL/Supabase/Firebase)
-                แอป Android (Java/Kotlin) จุดแข็งของผมคือการเรียนรู้ไว
-                ทำงานเป็นขั้นตอน <br />
-                และแก้ปัญหาแบบไม่หลุดเป้าหมายครับ</b
+            <p class="muted about-text">
+              <span data-i18n="aboutGreeting">Hello!</span>
+              <b class="text-strong" data-i18n="aboutBody"
+                >I'm Kawpun, a Computer Science student at Khon Kaen University.</b
               >
             </p>
           </div>
           <div class="card p col-4 highlights-card">
-            <p class="highlights-title"><b>Highlights</b></p>
+            <p class="highlights-title"><b data-i18n="highlightsHeading">Highlights</b></p>
             <ul class="muted highlights-list">
-              <li>Full-Stack web + database</li>
-              <li>Mobile app with auth/data</li>
-              <li>UX/UI design (Figma)</li>
-              <li>Automated testing (Robot Framework)</li>
-              <li>Problem solving & teamwork</li>
+              <li data-i18n="highlightFullStack">Full-Stack web + database</li>
+              <li data-i18n="highlightMobile">Mobile apps with authentication and data</li>
+              <li data-i18n="highlightDesign">UX/UI design with Figma</li>
+              <li data-i18n="highlightTesting">Automated testing with Robot Framework</li>
+              <li data-i18n="highlightTeamwork">Problem solving and teamwork</li>
             </ul>
           </div>
         </div>
@@ -215,24 +223,35 @@
       <!-- ===== PROJECTS SECTION ===== -->
       <section id="projects">
         <div class="section-title">
-          <h2>My Projects</h2>
+          <h2 data-i18n="projectsHeading">My Projects</h2>
         </div>
         <div class="grid" id="projectsGrid">
           <div class="card p col-12 project-fallback">
-            The interactive project gallery requires JavaScript.
-            <a href="https://github.com/PunKunGG">View projects on GitHub</a>
+            <span data-i18n="projectFallback">The interactive project gallery requires JavaScript.</span>
+            <a href="https://github.com/PunKunGG" data-i18n="viewProjectsGithub">View projects on GitHub</a>
           </div>
+        </div>
+        <div class="collection-controls project-controls" id="projectControls" hidden>
+          <button
+            class="btn collection-toggle project-toggle"
+            id="projectToggle"
+            type="button"
+            aria-controls="projectsGrid"
+            aria-expanded="false"
+          >
+            Show more projects
+          </button>
         </div>
       </section>
 
       <!-- ===== SKILLS SECTION ===== -->
       <section id="skills">
         <div class="section-title">
-          <h2>Skills</h2>
+          <h2 data-i18n="skillsHeading">Skills</h2>
         </div>
         <div class="grid">
           <div class="card p col-6">
-            <p class="skill-title"><b>Languages</b></p>
+            <p class="skill-title"><b data-i18n="languagesHeading">Languages</b></p>
             <div class="skills">
               <span class="chip">HTML</span>
               <span class="chip">CSS</span>
@@ -248,7 +267,7 @@
             </div>
           </div>
           <div class="card p col-6">
-            <p class="skill-title"><b>Frameworks & Tools</b></p>
+            <p class="skill-title"><b data-i18n="frameworksHeading">Frameworks & Tools</b></p>
             <div class="skills">
               <span class="chip">Robot Framework</span>
               <span class="chip">Angular</span>
@@ -267,16 +286,16 @@
             </div>
           </div>
           <div class="card p col-6">
-            <p class="skill-title"><b>Personal Skills</b></p>
+            <p class="skill-title"><b data-i18n="personalSkillsHeading">Personal Skills</b></p>
             <div class="skills">
-              <span class="chip">Team Collaboration</span>
-              <span class="chip">Problem Solving</span>
-              <span class="chip">Effective Communication</span>
-              <span class="chip">Adaptability</span>
-              <span class="chip">Critical Thinking</span>
-              <span class="chip">Time Management</span>
-              <span class="chip">Agile Methodology</span>
-              <span class="chip">Self-Directed Learning</span>
+              <span class="chip" data-i18n="skillTeamwork">Team Collaboration</span>
+              <span class="chip" data-i18n="skillProblemSolving">Problem Solving</span>
+              <span class="chip" data-i18n="skillCommunication">Effective Communication</span>
+              <span class="chip" data-i18n="skillAdaptability">Adaptability</span>
+              <span class="chip" data-i18n="skillCriticalThinking">Critical Thinking</span>
+              <span class="chip" data-i18n="skillTimeManagement">Time Management</span>
+              <span class="chip" data-i18n="skillAgile">Agile Methodology</span>
+              <span class="chip" data-i18n="skillSelfLearning">Self-Directed Learning</span>
             </div>
           </div>
         </div>
@@ -285,13 +304,14 @@
       <!-- ===== GITHUB ACTIVITY SECTION ===== -->
       <section id="github">
         <div class="section-title">
-          <h2>GitHub Activity</h2>
+          <h2 data-i18n="githubHeading">GitHub Activity</h2>
         </div>
         <div class="card p col-12 github-card">
           <img
             id="githubContrib"
             src="https://ghchart.rshah.org/4a7fff/PunKunGG"
             alt="GitHub Contribution Graph"
+            data-i18n-alt="githubAlt"
             loading="lazy"
             decoding="async"
             class="contribution-graph"
@@ -302,10 +322,11 @@
               href="https://github.com/PunKunGG"
               target="_blank"
               rel="noopener"
+              data-i18n="githubActivityLink"
               >View complete activity on GitHub</a
             >
             <div class="github-legend">
-              <span class="legend-label">Less</span>
+              <span class="legend-label" data-i18n="less">Less</span>
               <div class="legend-squares">
                 <span class="legend-sq legend-sq-1"></span>
                 <span class="legend-sq legend-sq-2"></span>
@@ -313,7 +334,7 @@
                 <span class="legend-sq legend-sq-4"></span>
                 <span class="legend-sq legend-sq-5"></span>
               </div>
-              <span class="legend-label">More</span>
+              <span class="legend-label" data-i18n="more">More</span>
             </div>
           </div>
         </div>
@@ -322,7 +343,7 @@
       <!-- ===== CERTIFICATES SECTION ===== -->
       <section id="certificates">
         <div class="section-title">
-          <h2>Certificates</h2>
+          <h2 data-i18n="certificatesHeading">Certificates</h2>
         </div>
         <div class="grid" id="certificatesGrid">
           <!-- Certificate 1 -->
@@ -927,9 +948,9 @@
             </div>
           </div>
         </div>
-        <div class="certificate-controls" id="certificateControls" hidden>
+        <div class="collection-controls certificate-controls" id="certificateControls" hidden>
           <button
-            class="btn certificate-toggle"
+            class="btn collection-toggle certificate-toggle"
             id="certificateToggle"
             type="button"
             aria-controls="certificatesGrid"
@@ -943,11 +964,11 @@
       <!-- ===== CONTACT SECTION ===== -->
       <section id="contact">
         <div class="section-title">
-          <h2>Contact</h2>
+          <h2 data-i18n="contactHeading">Contact</h2>
         </div>
         <div class="grid">
           <div class="card p col-12">
-            <p class="muted contact-intro">
+            <p class="muted contact-intro" data-i18n="contactIntro">
               Want to collaborate or talk about projects? Reach me here:
             </p>
             <div class="contact-info">
@@ -978,7 +999,7 @@
                     alt="Email"
                 /></span>
                 <div class="contact-detail">
-                  <span class="contact-label">Email</span>
+                  <span class="contact-label" data-i18n="email">Email</span>
                   <a class="contact-value" href="mailto:kawpun1140@gmail.com"
                     >kawpun1140@gmail.com</a
                   >
@@ -1012,8 +1033,8 @@
       <!-- ===== FOOTER ===== -->
       <footer class="wrap">
         <div class="tiny">
-          © <span id="year"></span> Kawpun | Portfolio Website · Built with
-          plain HTML/CSS on GitHub Pages
+          © <span id="year"></span>
+          <span data-i18n="footerText">Kawpun | Portfolio Website · Built with plain HTML/CSS on GitHub Pages</span>
         </div>
       </footer>
     </main>

@@ -1,9 +1,55 @@
 import { projects } from "./projects.js";
+import {
+  DEFAULT_LANGUAGE,
+  SUPPORTED_LANGUAGES,
+  interpolate,
+  translations,
+} from "./i18n.js";
 
-// ========== MOBILE NAVIGATION ==========
+const html = document.documentElement;
+const metaDescription = document.querySelector('meta[name="description"]');
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("primaryNav");
+const languageToggle = document.getElementById("languageToggle");
+const languageLabel = document.getElementById("languageLabel");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.querySelector(".theme-icon");
+const yearEl = document.getElementById("year");
 
+function readPreference(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function savePreference(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // The interface still works when browser storage is unavailable.
+  }
+}
+
+const savedLanguage = readPreference("language");
+let currentLanguage = SUPPORTED_LANGUAGES.includes(savedLanguage)
+  ? savedLanguage
+  : DEFAULT_LANGUAGE;
+
+function t(key, values) {
+  const template =
+    translations[currentLanguage][key] ??
+    translations[DEFAULT_LANGUAGE][key] ??
+    key;
+  return interpolate(template, values);
+}
+
+function localizedText(value) {
+  return value[currentLanguage] ?? value[DEFAULT_LANGUAGE];
+}
+
+// ========== MOBILE NAVIGATION ==========
 function setNavigationOpen(isOpen) {
   if (!navToggle || !navLinks) return;
 
@@ -11,7 +57,7 @@ function setNavigationOpen(isOpen) {
   navToggle.setAttribute("aria-expanded", String(isOpen));
   navToggle.setAttribute(
     "aria-label",
-    isOpen ? "Close navigation menu" : "Open navigation menu",
+    t(isOpen ? "closeNavigation" : "openNavigation"),
   );
 }
 
@@ -31,26 +77,18 @@ if (navToggle && navLinks) {
 }
 
 // ========== THEME TOGGLE ==========
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.querySelector(".theme-icon");
-const html = document.documentElement;
-
-// GitHub stats URLs for light and dark themes
 const githubUrls = {
-  light: {
-    contrib: "https://ghchart.rshah.org/4a7fff/PunKunGG",
-  },
-  dark: {
-    contrib: "https://ghchart.rshah.org/7aa2ff/PunKunGG",
-  },
+  light: { contrib: "https://ghchart.rshah.org/4a7fff/PunKunGG" },
+  dark: { contrib: "https://ghchart.rshah.org/7aa2ff/PunKunGG" },
 };
 
-// Update GitHub images based on theme
+function currentTheme() {
+  return html.getAttribute("data-theme") === "dark" ? "dark" : "light";
+}
+
 function updateGithubImages(theme) {
   const contribImg = document.getElementById("githubContrib");
-
   const urls = githubUrls[theme] || githubUrls.light;
-
   if (contribImg) contribImg.src = urls.contrib;
 }
 
@@ -62,26 +100,18 @@ function updateThemeControl(theme) {
     themeToggle.setAttribute("aria-pressed", String(isDark));
     themeToggle.setAttribute(
       "aria-label",
-      isDark ? "Switch to light theme" : "Switch to dark theme",
+      t(isDark ? "switchToLight" : "switchToDark"),
     );
   }
 }
 
-// Check saved theme or default to light
-const savedTheme = localStorage.getItem("theme") || "light";
-if (savedTheme === "dark") {
-  html.setAttribute("data-theme", "dark");
-  updateThemeControl("dark");
-  updateGithubImages("dark");
-} else {
-  updateThemeControl("light");
-}
+const savedTheme = readPreference("theme") === "dark" ? "dark" : "light";
+if (savedTheme === "dark") html.setAttribute("data-theme", "dark");
+updateGithubImages(savedTheme);
 
-// Toggle theme on click
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    const currentTheme = html.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    const newTheme = currentTheme() === "dark" ? "light" : "dark";
 
     if (newTheme === "dark") {
       html.setAttribute("data-theme", "dark");
@@ -89,24 +119,59 @@ if (themeToggle) {
       html.removeAttribute("data-theme");
     }
 
-    // Update the accessible control and icon
     updateThemeControl(newTheme);
-
-    // Update GitHub images
     updateGithubImages(newTheme);
-
-    // Save preference
-    localStorage.setItem("theme", newTheme);
+    savePreference("theme", newTheme);
   });
 }
 
-// Update footer year
-const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ========== PROJECT MODAL ==========
+// ========== EXPANDABLE COLLECTIONS ==========
+function updateExpandableCollection({
+  items,
+  initialVisible,
+  isExpanded,
+  controls,
+  toggle,
+  moreLabelKey,
+  restoreToggleView = false,
+}) {
+  items.forEach((item, index) => {
+    item.hidden = !isExpanded && index >= initialVisible;
+  });
 
+  const hiddenCount = Math.max(items.length - initialVisible, 0);
+  if (controls) controls.hidden = hiddenCount === 0;
+
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", String(isExpanded));
+    toggle.textContent = isExpanded
+      ? t("showLess")
+      : t(moreLabelKey, { count: hiddenCount });
+  }
+
+  if (restoreToggleView && toggle) {
+    window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      toggle.focus({ preventScroll: true });
+      toggle.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "center",
+      });
+    });
+  }
+}
+
+// ========== PROJECTS ==========
+const INITIAL_VISIBLE_PROJECTS = 4;
 const projectsGrid = document.getElementById("projectsGrid");
+const projectControls = document.getElementById("projectControls");
+const projectToggle = document.getElementById("projectToggle");
+let projectsExpanded = false;
+
 const projectLinkIcons = Object.freeze({
   repository:
     '<svg class="link-icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>',
@@ -115,14 +180,25 @@ const projectLinkIcons = Object.freeze({
   external:
     '<svg class="external-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
 });
+
+function isLocalizedText(value) {
+  return (
+    value &&
+    SUPPORTED_LANGUAGES.every(
+      (language) =>
+        typeof value[language] === "string" && value[language].trim(),
+    )
+  );
+}
+
 const projectIds = new Set();
 const validProjects = projects.filter((project) => {
   const isValid =
     project &&
     typeof project.id === "string" &&
-    typeof project.title === "string" &&
-    typeof project.summary === "string" &&
-    typeof project.description === "string" &&
+    isLocalizedText(project.title) &&
+    isLocalizedText(project.summary) &&
+    isLocalizedText(project.description) &&
     Array.isArray(project.images) &&
     project.images.length > 0 &&
     project.images.every((image) => typeof image === "string") &&
@@ -148,9 +224,26 @@ const validProjects = projects.filter((project) => {
 
   return isValid;
 });
+
 const projectsById = new Map(
   validProjects.map((project) => [project.id, project]),
 );
+
+function updateProjectVisibility(restoreToggleView = false) {
+  const projectCards = projectsGrid
+    ? Array.from(projectsGrid.querySelectorAll(".project"))
+    : [];
+
+  updateExpandableCollection({
+    items: projectCards,
+    initialVisible: INITIAL_VISIBLE_PROJECTS,
+    isExpanded: projectsExpanded,
+    controls: projectControls,
+    toggle: projectToggle,
+    moreLabelKey: "showMoreProjects",
+    restoreToggleView,
+  });
+}
 
 function createProjectCard(project) {
   const article = document.createElement("article");
@@ -158,18 +251,15 @@ function createProjectCard(project) {
   article.dataset.project = project.id;
 
   const title = document.createElement("h3");
-  title.textContent = project.title;
+  title.textContent = localizedText(project.title);
 
   const summary = document.createElement("p");
   summary.className = "muted";
-  summary.textContent = project.summary;
+  summary.textContent = localizedText(project.summary);
 
   const tags = document.createElement("div");
   tags.className = "meta";
-  const visibleTagCount = Math.min(
-    Math.max(project.cardTagCount || project.tags.length, 0),
-    project.tags.length,
-  );
+  const visibleTagCount = Math.min(project.cardTagCount, project.tags.length);
   project.tags.slice(0, visibleTagCount).forEach((tag) => {
     const pill = document.createElement("span");
     pill.className = "pill";
@@ -181,7 +271,7 @@ function createProjectCard(project) {
   button.className = "view-project-btn";
   button.type = "button";
   button.dataset.project = project.id;
-  button.textContent = "View Details";
+  button.textContent = t("viewDetails");
 
   article.append(title, summary, tags, button);
   return article;
@@ -195,11 +285,11 @@ function renderProjects() {
   if (validProjects.length === 0) {
     const fallback = document.createElement("div");
     fallback.className = "card p col-12";
-    fallback.textContent = "Projects are temporarily unavailable. ";
+    fallback.append(document.createTextNode(`${t("projectsUnavailable")} `));
 
     const link = document.createElement("a");
     link.href = "https://github.com/PunKunGG";
-    link.textContent = "View projects on GitHub";
+    link.textContent = t("viewProjectsGithub");
     fallback.append(link);
     fragment.append(fallback);
   } else {
@@ -209,11 +299,17 @@ function renderProjects() {
   }
 
   projectsGrid.replaceChildren(fragment);
+  updateProjectVisibility();
 }
 
-renderProjects();
+if (projectToggle) {
+  projectToggle.addEventListener("click", () => {
+    projectsExpanded = !projectsExpanded;
+    updateProjectVisibility(!projectsExpanded);
+  });
+}
 
-// DOM Elements
+// ========== PROJECT MODAL ==========
 const modal = document.getElementById("projectModal");
 const modalImage = document.getElementById("modalImage");
 const modalTitle = document.getElementById("modalTitle");
@@ -225,7 +321,7 @@ const galleryPrev = document.getElementById("galleryPrev");
 const galleryNext = document.getElementById("galleryNext");
 const galleryCounter = document.getElementById("galleryCounter");
 
-// Gallery state
+let currentProjectId = null;
 let currentImages = [];
 let currentImageIndex = 0;
 let galleryUpdateTimer = null;
@@ -234,7 +330,6 @@ let lastFocusedElement = null;
 function setPageInert(isInert) {
   const nav = document.querySelector("nav");
   const main = document.querySelector("main");
-
   if (nav) nav.inert = isInert;
   if (main) main.inert = isInert;
 }
@@ -247,9 +342,7 @@ function openDialog(dialog, focusTarget) {
   dialog.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   setPageInert(true);
-
-  const elementToFocus = focusTarget || dialog;
-  window.setTimeout(() => elementToFocus?.focus({ preventScroll: true }), 0);
+  window.setTimeout(() => (focusTarget || dialog)?.focus(), 0);
 }
 
 function closeDialog(dialog) {
@@ -261,11 +354,7 @@ function closeDialog(dialog) {
   document.body.style.overflow = "";
   setPageInert(false);
   lastFocusedElement = null;
-
-  window.setTimeout(
-    () => elementToRestore?.focus({ preventScroll: true }),
-    0,
-  );
+  window.setTimeout(() => elementToRestore?.focus({ preventScroll: true }), 0);
 }
 
 function trapFocus(dialog, event) {
@@ -298,33 +387,36 @@ function trapFocus(dialog, event) {
   }
 }
 
-// Update gallery display
-function updateGallery() {
-  if (currentImages.length === 0) return;
+function updateGallery(animate = true) {
+  if (!modalImage || currentImages.length === 0) return;
 
   const imageToShow = currentImages[currentImageIndex];
   clearTimeout(galleryUpdateTimer);
-  modalImage.style.opacity = "0";
-  galleryUpdateTimer = setTimeout(() => {
+
+  const showImage = () => {
     modalImage.src = imageToShow;
     modalImage.style.opacity = "1";
-  }, 150);
+  };
 
-  galleryCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
-
-  // Hide/show arrows if only one image
-  if (currentImages.length <= 1) {
-    galleryPrev.style.display = "none";
-    galleryNext.style.display = "none";
-    galleryCounter.style.display = "none";
+  if (animate) {
+    modalImage.style.opacity = "0";
+    galleryUpdateTimer = window.setTimeout(showImage, 150);
   } else {
-    galleryPrev.style.display = "flex";
-    galleryNext.style.display = "flex";
-    galleryCounter.style.display = "block";
+    showImage();
+  }
+
+  if (galleryCounter) {
+    galleryCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+  }
+
+  const galleryDisplay = currentImages.length <= 1 ? "none" : "flex";
+  if (galleryPrev) galleryPrev.style.display = galleryDisplay;
+  if (galleryNext) galleryNext.style.display = galleryDisplay;
+  if (galleryCounter) {
+    galleryCounter.style.display = currentImages.length <= 1 ? "none" : "block";
   }
 }
 
-// Navigate gallery
 function prevImage() {
   if (currentImages.length <= 1) return;
   currentImageIndex =
@@ -339,25 +431,20 @@ function nextImage() {
   updateGallery();
 }
 
-// Open modal with project data
-function openModal(projectId) {
-  const project = projectsById.get(projectId);
-  if (!project) return;
+function renderProjectModal(project) {
+  if (!modalImage || !modalTitle || !modalDescription || !modalTags || !modalLinks) {
+    return;
+  }
 
-  // Set gallery images
-  currentImages = project.images || [];
-  currentImageIndex = 0;
+  const title = localizedText(project.title);
+  currentImages = project.images;
+  currentImageIndex = Math.min(currentImageIndex, currentImages.length - 1);
 
-  // Populate modal content
-  modalImage.src = currentImages[0] || "";
-  modalImage.alt = project.title;
-  modalTitle.textContent = project.title;
-  modalDescription.textContent = project.description;
+  modalImage.alt = t("projectImageAlt", { title });
+  modalTitle.textContent = title;
+  modalDescription.textContent = localizedText(project.description);
+  updateGallery(false);
 
-  // Update gallery counter
-  updateGallery();
-
-  // Render tags
   const tagElements = project.tags.map((tag) => {
     const pill = document.createElement("span");
     pill.className = "pill";
@@ -366,14 +453,13 @@ function openModal(projectId) {
   });
   modalTags.replaceChildren(...tagElements);
 
-  // Render links with icons
   const linkElements = project.links.map((projectLink) => {
     const isRepository = projectLink.type === "repository";
     const link = document.createElement("a");
     const icon = isRepository
       ? projectLinkIcons.repository
       : projectLinkIcons.website;
-    const label = isRepository ? "GitHub Repository" : "Visit Website";
+    const label = t(isRepository ? "repository" : "website");
 
     link.className = `link ${isRepository ? "repo-link" : "page-link"}`;
     link.href = projectLink.url;
@@ -383,21 +469,29 @@ function openModal(projectId) {
     return link;
   });
   modalLinks.replaceChildren(...linkElements);
+}
 
-  // Show modal
+function openModal(projectId) {
+  const project = projectsById.get(projectId);
+  if (!project || !modal) return;
+
+  currentProjectId = project.id;
+  currentImageIndex = 0;
+  modal.dataset.project = project.id;
+  renderProjectModal(project);
   openDialog(modal, modalClose);
 }
 
-// Close modal
 function closeModal() {
   clearTimeout(galleryUpdateTimer);
   galleryUpdateTimer = null;
   closeDialog(modal);
+  currentProjectId = null;
   currentImages = [];
   currentImageIndex = 0;
+  if (modal) delete modal.dataset.project;
 }
 
-// Event listeners for view buttons
 if (projectsGrid) {
   projectsGrid.addEventListener("click", (event) => {
     const target = event.target;
@@ -405,82 +499,21 @@ if (projectsGrid) {
 
     const button = target.closest(".view-project-btn");
     if (!button || !projectsGrid.contains(button)) return;
-
     openModal(button.dataset.project);
   });
 }
 
-// Gallery navigation
-if (galleryPrev) {
-  galleryPrev.addEventListener("click", (e) => {
-    e.stopPropagation();
-    prevImage();
-  });
-}
-
-if (galleryNext) {
-  galleryNext.addEventListener("click", (e) => {
-    e.stopPropagation();
-    nextImage();
-  });
-}
-
-// Close modal on X button click
-if (modalClose) {
-  modalClose.addEventListener("click", closeModal);
-}
-
-// Close modal on overlay click
-if (modal) {
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-}
-
-// Keyboard navigation
-document.addEventListener("keydown", (e) => {
-  const navigationIsOpen =
-    navToggle?.getAttribute("aria-expanded") === "true";
-
-  if (navigationIsOpen && e.key === "Escape") {
-    setNavigationOpen(false);
-    navToggle.focus();
-    return;
-  }
-
-  if (
-    !modal.classList.contains("active") &&
-    !certLightbox?.classList.contains("active")
-  )
-    return;
-
-  if (modal.classList.contains("active")) {
-    trapFocus(modal, e);
-
-    switch (e.key) {
-      case "Escape":
-        closeModal();
-        break;
-      case "ArrowLeft":
-        e.preventDefault();
-        prevImage();
-        break;
-      case "ArrowRight":
-        e.preventDefault();
-        nextImage();
-        break;
-    }
-  }
-
-  if (certLightbox?.classList.contains("active")) {
-    trapFocus(certLightbox, e);
-
-    if (e.key === "Escape") {
-      closeCertLightbox();
-    }
-  }
+galleryPrev?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  prevImage();
+});
+galleryNext?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  nextImage();
+});
+modalClose?.addEventListener("click", closeModal);
+modal?.addEventListener("click", (event) => {
+  if (event.target === modal) closeModal();
 });
 
 // ========== CERTIFICATE LIGHTBOX ==========
@@ -496,87 +529,84 @@ const certLightboxImg = document.getElementById("certLightboxImg");
 const certLightboxTitle = document.getElementById("certLightboxTitle");
 const certLightboxIssuer = document.getElementById("certLightboxIssuer");
 const certLightboxClose = document.getElementById("certLightboxClose");
+const certificateIssuerNames = new Map(
+  certificateCards.map((card) => [
+    card,
+    (card.dataset.certIssuer || "").replace(/^Issued by\s*/i, ""),
+  ]),
+);
+let certificatesExpanded = false;
+let currentCertificateCard = null;
 
-function setCertificatesExpanded(isExpanded, restoreToggleView = false) {
-  certificateCards.forEach((card, index) => {
-    card.hidden = !isExpanded && index >= INITIAL_VISIBLE_CERTIFICATES;
-  });
-
-  if (certificateToggle) {
-    const hiddenCount = Math.max(
-      certificateCards.length - INITIAL_VISIBLE_CERTIFICATES,
-      0,
-    );
-    certificateToggle.setAttribute("aria-expanded", String(isExpanded));
-    certificateToggle.textContent = isExpanded
-      ? "Show less"
-      : `Show ${hiddenCount} more certificates`;
-  }
-
-  if (restoreToggleView && certificateToggle) {
-    window.requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      certificateToggle.focus({ preventScroll: true });
-      certificateToggle.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "center",
-      });
-    });
-  }
-}
-
-if (
-  certificateToggle &&
-  certificateControls &&
-  certificateCards.length > INITIAL_VISIBLE_CERTIFICATES
-) {
-  certificateControls.hidden = false;
-  setCertificatesExpanded(false);
-
-  certificateToggle.addEventListener("click", () => {
-    const isExpanded =
-      certificateToggle.getAttribute("aria-expanded") === "true";
-    setCertificatesExpanded(!isExpanded, isExpanded);
+function updateCertificateVisibility(restoreToggleView = false) {
+  updateExpandableCollection({
+    items: certificateCards,
+    initialVisible: INITIAL_VISIBLE_CERTIFICATES,
+    isExpanded: certificatesExpanded,
+    controls: certificateControls,
+    toggle: certificateToggle,
+    moreLabelKey: "showMoreCertificates",
+    restoreToggleView,
   });
 }
 
-// Open certificate lightbox
-function openCertLightbox(imgSrc, title, issuer) {
+function localizeCertificates() {
+  certificateCards.forEach((card) => {
+    const title = card.dataset.certTitle || "";
+    const issuerName = certificateIssuerNames.get(card) || "";
+    const issuer = issuerName ? `${t("issuedBy")} ${issuerName}` : "";
+    const issuerElement = card.querySelector(".cert-content > .muted");
+    const imageWrapper = card.querySelector(".cert-img-wrapper");
+
+    card.dataset.certIssuer = issuer;
+    card.setAttribute("aria-label", t("viewCertificate", { title }));
+    if (issuerElement) issuerElement.textContent = issuer;
+    if (imageWrapper) imageWrapper.dataset.viewLabel = t("clickToView");
+  });
+
+  if (currentCertificateCard && certLightboxIssuer) {
+    certLightboxIssuer.textContent = currentCertificateCard.dataset.certIssuer;
+  }
+}
+
+function openCertLightbox(card) {
   if (!certLightbox || !certLightboxImg) return;
 
+  const imgSrc = card.dataset.certImg;
+  const title = card.dataset.certTitle;
+  if (!imgSrc || !title) return;
+
+  currentCertificateCard = card;
   certLightboxImg.src = imgSrc;
   certLightboxImg.alt = title;
   if (certLightboxTitle) certLightboxTitle.textContent = title;
-  if (certLightboxIssuer) certLightboxIssuer.textContent = issuer;
-
+  if (certLightboxIssuer) {
+    certLightboxIssuer.textContent = card.dataset.certIssuer || "";
+  }
   openDialog(certLightbox, certLightboxClose);
 }
 
-// Close certificate lightbox
 function closeCertLightbox() {
-  if (!certLightbox) return;
   closeDialog(certLightbox);
+  currentCertificateCard = null;
 }
 
-// Add click listeners to certificate cards
+if (certificateToggle && certificateControls) {
+  certificateToggle.addEventListener("click", () => {
+    certificatesExpanded = !certificatesExpanded;
+    updateCertificateVisibility(!certificatesExpanded);
+  });
+}
+
 certificateCards.forEach((card) => {
-  const title = card.dataset.certTitle;
   card.setAttribute("role", "button");
   card.setAttribute("tabindex", "0");
   card.setAttribute("aria-haspopup", "dialog");
   card.setAttribute("aria-controls", "certLightbox");
-  card.setAttribute("aria-label", `View certificate: ${title}`);
 
   const openCertificate = () => {
-    const imgSrc = card.dataset.certImg;
-    const issuer = card.dataset.certIssuer;
-
-    if (imgSrc && title) {
-      card.focus({ preventScroll: true });
-      openCertLightbox(imgSrc, title, issuer || "");
-    }
+    card.focus({ preventScroll: true });
+    openCertLightbox(card);
   };
 
   card.addEventListener("click", openCertificate);
@@ -588,16 +618,85 @@ certificateCards.forEach((card) => {
   });
 });
 
-// Close lightbox on close button click
-if (certLightboxClose) {
-  certLightboxClose.addEventListener("click", closeCertLightbox);
+certLightboxClose?.addEventListener("click", closeCertLightbox);
+certLightbox?.addEventListener("click", (event) => {
+  if (event.target === certLightbox) closeCertLightbox();
+});
+
+// ========== LANGUAGE ==========
+function updateLanguageControl() {
+  if (languageLabel) {
+    languageLabel.textContent = currentLanguage === "en" ? "TH" : "EN";
+  }
+  if (languageToggle) {
+    languageToggle.setAttribute("aria-label", t("switchToLanguage"));
+  }
 }
 
-// Close lightbox on overlay click
-if (certLightbox) {
-  certLightbox.addEventListener("click", (e) => {
-    if (e.target === certLightbox) {
-      closeCertLightbox();
-    }
+function applyLanguage() {
+  html.lang = currentLanguage;
+  document.title = t("pageTitle");
+  if (metaDescription) metaDescription.content = t("pageDescription");
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = t(element.dataset.i18n);
   });
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    element.setAttribute("alt", t(element.dataset.i18nAlt));
+  });
+
+  updateLanguageControl();
+  updateThemeControl(currentTheme());
+  setNavigationOpen(navToggle?.getAttribute("aria-expanded") === "true");
+  renderProjects();
+  localizeCertificates();
+  updateCertificateVisibility();
+
+  modalClose?.setAttribute("aria-label", t("closeProject"));
+  galleryPrev?.setAttribute("aria-label", t("previousProjectImage"));
+  galleryNext?.setAttribute("aria-label", t("nextProjectImage"));
+  certLightboxClose?.setAttribute("aria-label", t("closeCertificate"));
+
+  if (currentProjectId && modal?.classList.contains("active")) {
+    const project = projectsById.get(currentProjectId);
+    if (project) renderProjectModal(project);
+  }
 }
+
+languageToggle?.addEventListener("click", () => {
+  currentLanguage = currentLanguage === "en" ? "th" : "en";
+    savePreference("language", currentLanguage);
+  applyLanguage();
+});
+
+// ========== GLOBAL KEYBOARD INTERACTIONS ==========
+document.addEventListener("keydown", (event) => {
+  const navigationIsOpen = navToggle?.getAttribute("aria-expanded") === "true";
+
+  if (navigationIsOpen && event.key === "Escape") {
+    setNavigationOpen(false);
+    navToggle.focus();
+    return;
+  }
+
+  if (modal?.classList.contains("active")) {
+    trapFocus(modal, event);
+    if (event.key === "Escape") closeModal();
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      prevImage();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      nextImage();
+    }
+    return;
+  }
+
+  if (certLightbox?.classList.contains("active")) {
+    trapFocus(certLightbox, event);
+    if (event.key === "Escape") closeCertLightbox();
+  }
+});
+
+applyLanguage();
