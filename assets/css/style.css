@@ -106,6 +106,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   position: relative;
   max-width: var(--max);
   margin: 0 auto;
@@ -129,6 +130,7 @@ nav {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 .nav-links a {
   padding: 8px 10px;
@@ -182,7 +184,15 @@ nav {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Theme Toggle */
+/* Navigation actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.language-toggle,
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -198,9 +208,18 @@ nav {
     0.2s background;
 }
 
+.language-toggle:hover,
 .theme-toggle:hover {
   transform: scale(1.05);
   background: var(--soft);
+}
+
+.language-toggle {
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .theme-icon {
@@ -633,9 +652,24 @@ a.contact-value:hover {
 .modal-gallery img {
   width: 100%;
   height: auto;
+  max-height: 55vh;
   display: block;
+  object-fit: contain;
+  background: var(--soft);
   border-radius: var(--radius) var(--radius) 0 0;
   transition: opacity 0.15s;
+}
+
+#projectModal[data-project="classmood-ai"] .modal-gallery {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+#projectModal[data-project="classmood-ai"] .modal-gallery img {
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: 50% 30%;
 }
 
 .gallery-arrow {
@@ -840,18 +874,19 @@ a.contact-value:hover {
   cursor: pointer;
 }
 
+.project[hidden],
 .certificate-card[hidden],
-.certificate-controls[hidden] {
+.collection-controls[hidden] {
   display: none !important;
 }
 
-.certificate-controls {
+.collection-controls {
   display: flex;
   justify-content: center;
   margin-top: 24px;
 }
 
-.certificate-toggle {
+.collection-toggle {
   min-width: 220px;
   cursor: pointer;
   font: inherit;
@@ -908,7 +943,7 @@ a.contact-value:hover {
 }
 
 .cert-img-wrapper::after {
-  content: "Click to View";
+  content: attr(data-view-label);
   position: absolute;
   bottom: 12px;
   left: 50%;
@@ -1206,6 +1241,14 @@ a.contact-value:hover {
     display: flex;
   }
 
+  .nav-inner {
+    gap: 12px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -1220,6 +1263,7 @@ a.contact-value:hover {
     border-radius: 16px;
     background: var(--card);
     box-shadow: var(--shadow);
+    margin-left: 0;
   }
 
   .nav-links.open {
