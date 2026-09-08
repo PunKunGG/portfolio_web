@@ -211,7 +211,7 @@ export const projects = Object.freeze([
       en: "A Mathayom 3 mathematics website built with the Next.js App Router. It provides dynamic lessons, documents, announcements, contact APIs, and authenticated administration for managing lessons and files through Supabase.",
       th: "เว็บไซต์รายวิชาคณิตศาสตร์ระดับมัธยมศึกษาปีที่ 3 ที่พัฒนาด้วย Next.js App Router มีบทเรียนแบบ dynamic เอกสาร ประกาศ API ติดต่อ และระบบผู้ดูแลแบบยืนยันตัวตนสำหรับจัดการบทเรียนกับไฟล์ผ่าน Supabase",
     },
-    images: ["assets/img/projects/math-teacher-profile.png"],
+    images: ["assets/img/projects/math-teacher.jpg"],
     tags: ["Next.js", "TypeScript", "Supabase", "API", "Education"],
     cardTagCount: 4,
     links: [
