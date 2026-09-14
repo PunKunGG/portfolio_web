@@ -189,11 +189,15 @@ export const projects = Object.freeze([
     },
     images: ["assets/img/projects/byte-defense-logo.png"],
     tags: ["JavaScript", "Game Development", "HTML", "CSS", "LocalStorage"],
-    cardTagCount: 4,
+    cardTagCount: 5,
     links: [
       {
         type: "repository",
         url: "https://github.com/PunKunGG/tower-defense",
+      },
+      {
+        type: "website",
+        url: "https://punkungg.github.io/tower-defense/",
       },
     ],
   },
