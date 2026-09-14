@@ -15,6 +15,7 @@ const languageLabel = document.getElementById("languageLabel");
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.querySelector(".theme-icon");
 const yearEl = document.getElementById("year");
+const scrollProgressBar = document.getElementById("scrollProgressBar");
 
 function readPreference(key) {
   try {
@@ -127,6 +128,31 @@ if (themeToggle) {
 
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// ========== SCROLL PROGRESS ==========
+let scrollProgressFrame = null;
+
+function updateScrollProgress() {
+  scrollProgressFrame = null;
+  if (!scrollProgressBar) return;
+
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+  const clampedProgress = Math.min(Math.max(progress, 0), 1);
+  scrollProgressBar.style.transform = `scaleX(${clampedProgress})`;
+}
+
+function scheduleScrollProgressUpdate() {
+  if (!scrollProgressBar || scrollProgressFrame !== null) return;
+  scrollProgressFrame = window.requestAnimationFrame(updateScrollProgress);
+}
+
+if (scrollProgressBar) {
+  window.addEventListener("scroll", scheduleScrollProgressUpdate, {
+    passive: true,
+  });
+  window.addEventListener("resize", scheduleScrollProgressUpdate);
+}
+
 // ========== EXPANDABLE COLLECTIONS ==========
 function updateExpandableCollection({
   items,
@@ -140,6 +166,7 @@ function updateExpandableCollection({
   items.forEach((item, index) => {
     item.hidden = !isExpanded && index >= initialVisible;
   });
+  scheduleScrollProgressUpdate();
 
   const hiddenCount = Math.max(items.length - initialVisible, 0);
   if (controls) controls.hidden = hiddenCount === 0;
@@ -171,6 +198,39 @@ const projectsGrid = document.getElementById("projectsGrid");
 const projectControls = document.getElementById("projectControls");
 const projectToggle = document.getElementById("projectToggle");
 let projectsExpanded = false;
+let activeSpotlightCard = null;
+
+const projectMotionMediaQuery = window.matchMedia(
+  "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+);
+
+function clearProjectSpotlight() {
+  activeSpotlightCard?.classList.remove("spotlight-active");
+  activeSpotlightCard = null;
+}
+
+function updateProjectSpotlight(event) {
+  if (!projectMotionMediaQuery.matches || !projectsGrid) return;
+
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+
+  const card = target.closest(".project");
+  if (!card || !projectsGrid.contains(card)) {
+    clearProjectSpotlight();
+    return;
+  }
+
+  if (activeSpotlightCard !== card) {
+    clearProjectSpotlight();
+    activeSpotlightCard = card;
+    card.classList.add("spotlight-active");
+  }
+
+  const bounds = card.getBoundingClientRect();
+  card.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+  card.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+}
 
 const projectLinkIcons = Object.freeze({
   repository:
@@ -280,6 +340,7 @@ function createProjectCard(project) {
 function renderProjects() {
   if (!projectsGrid) return;
 
+  clearProjectSpotlight();
   const fragment = document.createDocumentFragment();
 
   if (validProjects.length === 0) {
@@ -307,6 +368,21 @@ if (projectToggle) {
     projectsExpanded = !projectsExpanded;
     updateProjectVisibility(!projectsExpanded);
   });
+}
+
+if (projectsGrid) {
+  projectsGrid.addEventListener("pointermove", updateProjectSpotlight);
+  projectsGrid.addEventListener("pointerleave", clearProjectSpotlight);
+}
+
+const handleProjectMotionPreferenceChange = (event) => {
+  if (!event.matches) clearProjectSpotlight();
+};
+
+if (typeof projectMotionMediaQuery.addEventListener === "function") {
+  projectMotionMediaQuery.addEventListener("change", handleProjectMotionPreferenceChange);
+} else {
+  projectMotionMediaQuery.addListener(handleProjectMotionPreferenceChange);
 }
 
 // ========== PROJECT MODAL ==========
@@ -699,4 +775,60 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// ========== SCROLL REVEAL ==========
+const REVEAL_STAGGER_STEP_MS = 70;
+const MAX_REVEAL_DELAY_MS = 210;
+
+function initializeScrollReveal() {
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  const revealElements = Array.from(
+    document.querySelectorAll(
+      ".hero-grid > *, main section .section-title, main section .grid > .card, #projectsGrid > .project, footer",
+    ),
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -8%",
+    },
+  );
+
+  revealElements.forEach((element) => {
+    const siblings = Array.from(element.parentElement?.children || []);
+    const siblingIndex = Math.max(siblings.indexOf(element), 0);
+    const delay = Math.min(
+      siblingIndex * REVEAL_STAGGER_STEP_MS,
+      MAX_REVEAL_DELAY_MS,
+    );
+
+    element.style.setProperty("--reveal-delay", `${delay}ms`);
+    element.classList.add("reveal-item");
+    const handleRevealEnd = (event) => {
+      if (event.target !== element) return;
+      element.removeEventListener("animationend", handleRevealEnd);
+      element.classList.remove("reveal-item", "is-revealed");
+      element.style.removeProperty("--reveal-delay");
+    };
+
+    element.addEventListener("animationend", handleRevealEnd);
+    observer.observe(element);
+  });
+}
+
 applyLanguage();
+scheduleScrollProgressUpdate();
+initializeScrollReveal();

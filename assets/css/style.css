@@ -12,6 +12,8 @@
   --radius: 18px;
   --max: 1080px;
   --gradient-opacity: 0.15;
+  --spotlight-color: rgba(74, 127, 255, 0.2);
+  --path-opacity: 0.34;
 }
 
 /* Dark Mode */
@@ -26,6 +28,8 @@
   --border: rgba(255, 255, 255, 0.1);
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
   --gradient-opacity: 0.25;
+  --spotlight-color: rgba(98, 230, 255, 0.18);
+  --path-opacity: 0.46;
 }
 
 * {
@@ -68,6 +72,26 @@ body {
   transition:
     background 0.3s ease,
     color 0.3s ease;
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 60;
+}
+
+.scroll-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  box-shadow: 0 0 14px rgba(74, 127, 255, 0.65);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 a {
@@ -234,12 +258,59 @@ nav {
 /* HERO */
 .hero {
   padding: 46px 0 26px;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-paths {
+  position: absolute;
+  inset: 8px 0 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: calc(var(--radius) + 10px);
+  pointer-events: none;
+  opacity: var(--path-opacity);
+}
+
+.hero-paths svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-path {
+  fill: none;
+  stroke: url(#heroPathGradient);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-dasharray: 12 22;
+  vector-effect: non-scaling-stroke;
+  animation: hero-path-flow 18s linear infinite;
+}
+
+.hero-path-b {
+  animation-duration: 24s;
+  animation-direction: reverse;
+  opacity: 0.72;
+}
+
+.hero-path-c {
+  animation-duration: 30s;
+  opacity: 0.52;
+}
+
+.hero-path-d {
+  animation-duration: 21s;
+  animation-direction: reverse;
+  opacity: 0.42;
 }
 .hero-grid {
   display: grid;
   grid-template-columns: 0.55fr 1.2fr 0.8fr;
   gap: 18px;
   align-items: stretch;
+  position: relative;
+  z-index: 1;
 }
 .card {
   background: linear-gradient(
@@ -410,6 +481,36 @@ h2 {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+}
+
+.project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    230px circle at var(--spotlight-x) var(--spotlight-y),
+    var(--spotlight-color),
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+
+.project > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project.spotlight-active::before,
+.project:focus-within::before {
+  opacity: 1;
 }
 .project h3 {
   margin: 0;
@@ -1280,6 +1381,34 @@ a.contact-value:hover {
   }
 }
 
+@keyframes hero-path-flow {
+  to {
+    stroke-dashoffset: -420;
+  }
+}
+
+@keyframes content-reveal {
+  from {
+    opacity: 0;
+    filter: blur(7px);
+    transform: translateY(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+.reveal-item {
+  opacity: 0;
+}
+
+.reveal-item.is-revealed {
+  animation: content-reveal 0.68s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1291,5 +1420,21 @@ a.contact-value:hover {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hero-path {
+    animation: none;
+  }
+
+  .reveal-item,
+  .reveal-item.is-revealed {
+    opacity: 1;
+    animation: none;
+    filter: none;
+    transform: none;
+  }
+
+  .project::before {
+    display: none;
   }
 }

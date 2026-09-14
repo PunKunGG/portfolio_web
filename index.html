@@ -54,6 +54,10 @@
   </head>
 
   <body>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scrollProgressBar"></span>
+    </div>
+
     <!-- ========== NAVIGATION ========== -->
     <nav>
       <div class="nav-inner">
@@ -107,6 +111,42 @@
     <main class="wrap">
       <!-- ===== HERO SECTION ===== -->
       <header class="hero">
+        <div class="hero-paths" aria-hidden="true">
+          <svg
+            viewBox="0 0 1200 520"
+            preserveAspectRatio="none"
+            focusable="false"
+          >
+            <defs>
+              <linearGradient
+                id="heroPathGradient"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="1"
+              >
+                <stop offset="0%" stop-color="var(--brand)" />
+                <stop offset="100%" stop-color="var(--brand2)" />
+              </linearGradient>
+            </defs>
+            <path
+              class="hero-path hero-path-a"
+              d="M-80 390 C160 160 340 510 590 245 S960 35 1280 210"
+            />
+            <path
+              class="hero-path hero-path-b"
+              d="M-100 150 C145 360 315 15 560 205 S945 475 1280 285"
+            />
+            <path
+              class="hero-path hero-path-c"
+              d="M-60 470 C210 285 390 570 690 310 S1010 120 1260 70"
+            />
+            <path
+              class="hero-path hero-path-d"
+              d="M20 40 C260 210 410 -55 700 120 S1010 395 1220 455"
+            />
+          </svg>
+        </div>
         <div class="hero-grid">
           <div class="card hero-photo">
             <div class="avatar">
