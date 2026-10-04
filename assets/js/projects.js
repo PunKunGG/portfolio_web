@@ -15,6 +15,34 @@
 /** @type {ReadonlyArray<PortfolioProject>} */
 export const projects = Object.freeze([
   {
+    id: "nexusplay",
+    title: {
+      en: "NexusPlay — Order Tracking",
+      th: "NexusPlay ระบบติดตามคำสั่งซื้อ",
+    },
+    summary: {
+      en: "A responsive order-tracking interface with search, status tabs, validation, and accessible feedback.",
+      th: "หน้าติดตามคำสั่งซื้อแบบ responsive พร้อมการค้นหา แท็บสถานะ การตรวจสอบข้อมูล และ feedback ที่เข้าถึงได้",
+    },
+    description: {
+      en: "A Front-End Developer technical assessment built with the Next.js App Router, React, TypeScript, and Tailwind CSS. It uses fictional local data to demonstrate order search, current and completed order tabs, validation, loading and error states, copy feedback, keyboard navigation, and responsive accessible design without requiring a backend.",
+      th: "ผลงานแบบทดสอบตำแหน่ง Front-End Developer ที่พัฒนาด้วย Next.js App Router, React, TypeScript และ Tailwind CSS ใช้ข้อมูลจำลองภายในเครื่องเพื่อสาธิตการค้นหาคำสั่งซื้อ แท็บรายการปัจจุบันและประวัติ การตรวจสอบข้อมูล สถานะโหลดและข้อผิดพลาด feedback การคัดลอก การใช้งานด้วยคีย์บอร์ด และการออกแบบ responsive ที่เข้าถึงได้โดยไม่ต้องมี backend",
+    },
+    images: ["assets/img/projects/nexusplay-preview.svg"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Accessibility"],
+    cardTagCount: 4,
+    links: [
+      {
+        type: "repository",
+        url: "https://github.com/PunKunGG/NexusPlay",
+      },
+      {
+        type: "website",
+        url: "https://nexus-play-one.vercel.app/",
+      },
+    ],
+  },
+  {
     id: "personal-work",
     title: { en: "Mobile Web Lab", th: "แลปพัฒนาเว็บและโมบาย" },
     summary: {
