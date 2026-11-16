@@ -15,6 +15,31 @@
 /** @type {ReadonlyArray<PortfolioProject>} */
 export const projects = Object.freeze([
   {
+    id: "xray-mirror",
+    title: { en: "X-Ray Mirror", th: "X-Ray Mirror กระจกกายวิภาค 3 มิติ" },
+    summary: {
+      en: "An interactive anatomy demo that overlays 3D head and hand models on a mirrored camera preview.",
+      th: "เดโมกายวิภาคแบบโต้ตอบที่ซ้อนโมเดลศีรษะและกระดูกมือ 3 มิติบนภาพจากกล้องแบบกระจก",
+    },
+    description: {
+      en: "A browser-based demo built with Three.js and MediaPipe. The 3D layers follow head pose, and a lens controlled by hand movement reveals anatomy in part of the preview. Users can switch between layers such as the skull, brain, and muscles, and turn on labels. Camera frames are processed on the device. Preview anatomy: BodyParts3D, © The Database Center for Life Science (CC BY 4.0).",
+      th: "เดโมบนเบราว์เซอร์ที่ใช้ Three.js และ MediaPipe โดยชั้นโมเดล 3 มิติจะขยับตามท่าทางของศีรษะ และใช้การเคลื่อนไหวของมือควบคุมเลนส์ที่เผยกายวิภาคเฉพาะบริเวณในภาพ ผู้ใช้เลือกเปิดชั้นกะโหลก สมอง หรือกล้ามเนื้อ และเปิดป้ายชื่อได้ ภาพจากกล้องประมวลผลบนอุปกรณ์ โมเดลในภาพตัวอย่างจาก BodyParts3D © The Database Center for Life Science (CC BY 4.0)",
+    },
+    images: ["assets/img/projects/xray-mirror-preview.png"],
+    tags: ["Three.js", "MediaPipe", "TypeScript", "Computer Vision"],
+    cardTagCount: 4,
+    links: [
+      {
+        type: "repository",
+        url: "https://github.com/PunKunGG/xray-mirror",
+      },
+      {
+        type: "website",
+        url: "https://xray-mirror-6y5.pages.dev/",
+      },
+    ],
+  },
+  {
     id: "nexusplay",
     title: {
       en: "NexusPlay — Order Tracking",
